@@ -540,12 +540,19 @@ h1 {
 }
 
 .visual-panel {
-    height: 250px;
+    min-height: 280px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 16px;
+    padding: 24px;
     overflow: hidden;
+}
+
+.visual-panel svg {
+    max-width: 100%;
+    max-height: 100%;
+    box-sizing: border-box;
+    padding: 10px;
 }
 
 .code-panel {
@@ -703,6 +710,21 @@ h1 {
 
 .sidebar-collapsed .sidebar-open-btn {
     display: flex; /* show when collapsed */
+}
+
+.workspace-footer {
+    padding: 20px 30px;
+    background-color: #ffffff;
+    border-top: 1px solid var(--border-grey);
+    text-align: center;
+    font-size: 11px;
+    color: var(--text-secondary);
+    font-weight: 500;
+    line-height: 1.5;
+}
+
+.workspace-footer strong {
+    color: var(--bg-corporate-dark);
 }
 
 /* ==========================================================================

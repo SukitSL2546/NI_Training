@@ -238,16 +238,16 @@ smuPins.ForceVoltage(3.3, currentLimit);`,
                 
                 <!-- Channels output -->
                 <rect x="320" y="35" width="65" height="25" class="dia-box" />
-                <text x="3525" y="50" class="dia-text" style="font-size: 8px; text-anchor: middle;">SMU Ch 0 (3.3V)</text>
+                <text x="352.5" y="50" class="dia-text" style="font-size: 8px; text-anchor: middle;">SMU Ch 0 (3.3V)</text>
                 
                 <rect x="320" y="75" width="65" height="25" class="dia-box" />
-                <text x="3525" y="90" class="dia-text" style="font-size: 8px; text-anchor: middle;">SMU Ch 1 (3.3V)</text>
+                <text x="352.5" y="90" class="dia-text" style="font-size: 8px; text-anchor: middle;">SMU Ch 1 (3.3V)</text>
                 
                 <rect x="320" y="115" width="65" height="25" class="dia-box" />
-                <text x="3525" y="130" class="dia-text" style="font-size: 8px; text-anchor: middle;">SMU Ch 2 (3.3V)</text>
+                <text x="352.5" y="130" class="dia-text" style="font-size: 8px; text-anchor: middle;">SMU Ch 2 (3.3V)</text>
                 
                 <rect x="320" y="155" width="65" height="25" class="dia-box" />
-                <text x="3525" y="170" class="dia-text" style="font-size: 8px; text-anchor: middle;">SMU Ch 3 (3.3V)</text>
+                <text x="352.5" y="170" class="dia-text" style="font-size: 8px; text-anchor: middle;">SMU Ch 3 (3.3V)</text>
             </svg>
         `
     },
