@@ -1,0 +1,201 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ATE Academy - NI TSM & STL Training Portal</title>
+    <meta name="description" content="A professional corporate training portal for NI TestStand Semiconductor Module (TSM) and Semiconductor Test Library (STL) C# Development.">
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Fira+Code:wght@400;500;600&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-layout">
+        <!-- Sidebar Navigation -->
+        <aside class="sidebar">
+            <div class="sidebar-header">
+                <div class="logo-container">
+                    <svg class="logo-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <polygon points="12 2 22 8.5 22 15.5 12 22 2 15.5 2 8.5 12 2"/>
+                        <path d="M12 22V12"/>
+                        <path d="M22 8.5 12 12 2 8.5"/>
+                    </svg>
+                    <span>ATE ACADEMY</span>
+                </div>
+                <div class="subtitle">NI TSM & STL Framework</div>
+                <button class="sidebar-close-btn" id="btn-collapse-sidebar" onclick="toggleSidebar(true)" aria-label="Collapse Sidebar">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <polyline points="15 18 9 12 15 6"></polyline>
+                    </svg>
+                </button>
+                
+                <!-- Progress Tracker Widget -->
+                <div class="progress-widget">
+                    <div class="progress-header">
+                        <span>ความคืบหน้าการศึกษา</span>
+                        <span id="progress-percent">0%</span>
+                    </div>
+                    <div class="progress-bar-container">
+                        <div class="progress-bar-fill" id="progress-fill"></div>
+                    </div>
+                    <div class="progress-count" id="progress-count">เรียนรู้แล้ว 0 จาก 12 หัวข้อ</div>
+                </div>
+            </div>
+            
+            <nav class="nav-menu">
+                <!-- Module 1: Core Framework -->
+                <div class="nav-section">Module 1: Core Framework</div>
+                <ul class="nav-list">
+                    <li class="nav-item active" id="nav-stl_intro" onclick="switchSyllabus('stl_intro')">
+                        <input type="checkbox" class="nav-check" id="chk-stl_intro" onclick="toggleComplete('stl_intro', event)">
+                        <span class="nav-text">1. STL คืออะไร</span>
+                    </li>
+                    <li class="nav-item" id="nav-abstraction" onclick="switchSyllabus('abstraction')">
+                        <input type="checkbox" class="nav-check" id="chk-abstraction" onclick="toggleComplete('abstraction', event)">
+                        <span class="nav-text">2. Instrument Abstraction</span>
+                    </li>
+                    <li class="nav-item" id="nav-session_manager" onclick="switchSyllabus('session_manager')">
+                        <input type="checkbox" class="nav-check" id="chk-session_manager" onclick="toggleComplete('session_manager', event)">
+                        <span class="nav-text">3. TSMSessionManager</span>
+                    </li>
+                    <li class="nav-item" id="nav-session_bundle" onclick="switchSyllabus('session_bundle')">
+                        <input type="checkbox" class="nav-check" id="chk-session_bundle" onclick="toggleComplete('session_bundle', event)">
+                        <span class="nav-text">4. Session Bundle คืออะไร</span>
+                    </li>
+                    <li class="nav-item" id="nav-sitedata" onclick="switchSyllabus('sitedata')">
+                        <input type="checkbox" class="nav-check" id="chk-sitedata" onclick="toggleComplete('sitedata', event)">
+                        <span class="nav-text">5. SiteData / PinSiteData</span>
+                    </li>
+                </ul>
+
+                <!-- Module 2: Hardware Flows -->
+                <div class="nav-section">Module 2: Hardware Flows</div>
+                <ul class="nav-list">
+                    <li class="nav-item" id="nav-dcpower_flow" onclick="switchSyllabus('dcpower_flow')">
+                        <input type="checkbox" class="nav-check" id="chk-dcpower_flow" onclick="toggleComplete('dcpower_flow', event)">
+                        <span class="nav-text">6. DCPower Flow (SMU)</span>
+                    </li>
+                    <li class="nav-item" id="nav-digital_flow" onclick="switchSyllabus('digital_flow')">
+                        <input type="checkbox" class="nav-check" id="chk-digital_flow" onclick="toggleComplete('digital_flow', event)">
+                        <span class="nav-text">7. Digital / PPMU Flow</span>
+                    </li>
+                    <li class="nav-item" id="nav-dmm_flow" onclick="switchSyllabus('dmm_flow')">
+                        <input type="checkbox" class="nav-check" id="chk-dmm_flow" onclick="toggleComplete('dmm_flow', event)">
+                        <span class="nav-text">8. DMM Flow</span>
+                    </li>
+                    <li class="nav-item" id="nav-daq_flow" onclick="switchSyllabus('daq_flow')">
+                        <input type="checkbox" class="nav-check" id="chk-daq_flow" onclick="toggleComplete('daq_flow', event)">
+                        <span class="nav-text">9. DAQ Flow</span>
+                    </li>
+                </ul>
+
+                <!-- Module 3: Advanced Execution -->
+                <div class="nav-section">Module 3: Advanced Execution</div>
+                <ul class="nav-list">
+                    <li class="nav-item" id="nav-test_workflow" onclick="switchSyllabus('test_workflow')">
+                        <input type="checkbox" class="nav-check" id="chk-test_workflow" onclick="toggleComplete('test_workflow', event)">
+                        <span class="nav-text">10. Workflow ของ Test Code</span>
+                    </li>
+                    <li class="nav-item" id="nav-parallel_exec" onclick="switchSyllabus('parallel_exec')">
+                        <input type="checkbox" class="nav-check" id="chk-parallel_exec" onclick="toggleComplete('parallel_exec', event)">
+                        <span class="nav-text">11. Parallel Execution</span>
+                    </li>
+                    <li class="nav-item" id="nav-publish_results" onclick="switchSyllabus('publish_results')">
+                        <input type="checkbox" class="nav-check" id="chk-publish_results" onclick="toggleComplete('publish_results', event)">
+                        <span class="nav-text">12. Publish Results</span>
+                    </li>
+                </ul>
+            </nav>
+            
+            <div class="sidebar-footer">
+                <span>ADI / NI ATE Developer Training</span>
+            </div>
+        </aside>
+
+        <!-- Main Workspace Area -->
+        <main class="workspace">
+            <header class="workspace-header">
+                <div class="header-left">
+                    <button class="sidebar-open-btn" id="btn-expand-sidebar" onclick="toggleSidebar(false)" aria-label="Expand Sidebar">
+                        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="9" y1="3" x2="9" y2="21"></line>
+                            <path d="M12 15l3-3-3-3"></path>
+                        </svg>
+                    </button>
+                    <div class="header-title-container">
+                        <div class="badge" id="topic-module-badge">Module 1</div>
+                        <h1 id="topic-title">1. STL คืออะไร</h1>
+                    </div>
+                </div>
+                <div class="header-right">
+                    <div class="search-box">
+                        <span class="search-icon">🔍</span>
+                        <input type="text" id="search-input" placeholder="ค้นหาบทเรียนหรือคีย์เวิร์ด..." aria-label="Search lessons">
+                    </div>
+                </div>
+            </header>
+
+            <div class="workspace-body">
+                <div class="content-grid">
+                    <!-- Left Column: Core Lesson Content -->
+                    <div class="content-card card-primary">
+                        <h2 class="card-title">เนื้อหาหลักประจำบทเรียน (Lesson Narrative)</h2>
+                        <div class="lesson-narrative" id="lesson-content-area">
+                            <!-- Dynamic Content Rendered Here -->
+                        </div>
+                        
+                        <!-- Interactive Quiz Card -->
+                        <div class="quiz-container" id="quiz-block">
+                            <h3 class="quiz-title">📝 แบบทดสอบความรู้ (Interactive Quiz)</h3>
+                            <p class="quiz-question" id="quiz-question-text">คำถามจะแสดงที่นี่...</p>
+                            <div class="quiz-input-group">
+                                <input type="text" id="quiz-user-input" class="quiz-input" placeholder="พิมพ์คำตอบของคุณที่นี่..." aria-label="Type your quiz answer" onkeydown="if(event.key === 'Enter') checkQuizAnswer()">
+                                <button class="btn btn-primary" id="btn-quiz-check" onclick="checkQuizAnswer()">ส่งคำตอบ</button>
+                            </div>
+                            <div class="quiz-actions">
+                                <button class="quiz-link-btn" id="btn-quiz-hint" onclick="showQuizHint()">💡 ดูคำใบ้</button>
+                                <button class="quiz-link-btn" id="btn-quiz-solution" onclick="showQuizSolution()">🔑 ดูเฉลย</button>
+                            </div>
+                            <div class="quiz-feedback" id="quiz-feedback-area" style="display: none;"></div>
+                        </div>
+                        
+                        <!-- Actions panel -->
+                        <div class="action-panel">
+                            <button class="btn btn-outline" id="btn-prev" onclick="navigateTopic(-1)">⬅️ บทเรียนก่อนหน้า</button>
+                            <button class="btn btn-success" id="btn-complete-toggle" onclick="markCurrentTopicComplete()">ทำเครื่องหมายว่าเรียนรู้แล้ว ✓</button>
+                            <button class="btn btn-primary" id="btn-next" onclick="navigateTopic(1)">บทเรียนถัดไป ➡️</button>
+                        </div>
+                    </div>
+
+                    <!-- Right Column: Visual Flow & Code Snippets -->
+                    <div class="visual-card">
+                        <!-- Upper Block: Flow Diagram / Visual Layout -->
+                        <div class="visual-block-header">
+                            <h3>สถาปัตยกรรม / แผนภาพประกอบ (Architecture & Diagram)</h3>
+                        </div>
+                        <div class="visual-panel" id="diagram-area">
+                            <!-- Dynamic SVG or CSS-based diagram -->
+                        </div>
+
+                        <!-- Lower Block: Code Snippet Viewer -->
+                        <div class="code-block-header">
+                            <h3>โค้ดประกอบตัวอย่าง (C# Code Reference)</h3>
+                        </div>
+                        <div class="code-panel">
+                            <pre class="code-pre"><code class="code-code" id="code-snippet-area">
+// Snippet will render here...
+                            </code></pre>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="app.js"></script>
+</body>
+</html>
