@@ -40,7 +40,7 @@
                     <div class="progress-bar-container">
                         <div class="progress-bar-fill" id="progress-fill"></div>
                     </div>
-                    <div class="progress-count" id="progress-count">เรียนรู้แล้ว 0 จาก 12 หัวข้อ</div>
+                    <div class="progress-count" id="progress-count">เรียนรู้แล้ว 0 จาก 15 หัวข้อ</div>
                 </div>
             </div>
             
@@ -107,12 +107,32 @@
                         <span class="nav-text">12. Publish Results</span>
                     </li>
                 </ul>
+
+                <!-- Module 4: Hands-on Workshop -->
+                <div class="nav-section">Module 4: Hands-on Workshop</div>
+                <ul class="nav-list">
+                    <li class="nav-item" id="nav-test_assignment" onclick="switchSyllabus('test_assignment')">
+                        <input type="checkbox" class="nav-check" id="chk-test_assignment" onclick="toggleComplete('test_assignment', event)">
+                        <span class="nav-text">13. Workshop - ลองเขียน test.cs</span>
+                    </li>
+                    <li class="nav-item" id="nav-test_solution" onclick="switchSyllabus('test_solution')">
+                        <input type="checkbox" class="nav-check" id="chk-test_solution" onclick="toggleComplete('test_solution', event)">
+                        <span class="nav-text">14. เฉลยและอธิบายโค้ดละเอียด</span>
+                    </li>
+                    <li class="nav-item" id="nav-api_comparison" onclick="switchSyllabus('api_comparison')">
+                        <input type="checkbox" class="nav-check" id="chk-api_comparison" onclick="toggleComplete('api_comparison', event)">
+                        <span class="nav-text">15. เปรียบเทียบ Hi-Level vs Low-Level</span>
+                    </li>
+                </ul>
             </nav>
             
             <div class="sidebar-footer">
                 <span>ADI / NI ATE Developer Training</span>
             </div>
         </aside>
+
+        <!-- Sidebar Overlay Backdrop for Mobile -->
+        <div class="sidebar-overlay" id="sidebar-overlay" onclick="toggleSidebar(true)"></div>
 
         <!-- Main Workspace Area -->
         <main class="workspace">
@@ -132,7 +152,7 @@
                 </div>
                 <div class="header-right">
                     <div class="search-box">
-                        <span class="search-icon">🔍</span>
+                        <span class="search-icon"><svg class="search-svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="width: 13px; height: 13px; color: var(--text-muted); display: block;"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg></span>
                         <input type="text" id="search-input" placeholder="ค้นหาบทเรียนหรือคีย์เวิร์ด..." aria-label="Search lessons">
                     </div>
                 </div>
@@ -149,24 +169,24 @@
                         
                         <!-- Interactive Quiz Card -->
                         <div class="quiz-container" id="quiz-block">
-                            <h3 class="quiz-title">📝 แบบทดสอบความรู้ (Interactive Quiz)</h3>
+                            <h3 class="quiz-title">แบบทดสอบความรู้ (Interactive Quiz)</h3>
                             <p class="quiz-question" id="quiz-question-text">คำถามจะแสดงที่นี่...</p>
                             <div class="quiz-input-group">
                                 <input type="text" id="quiz-user-input" class="quiz-input" placeholder="พิมพ์คำตอบของคุณที่นี่..." aria-label="Type your quiz answer" onkeydown="if(event.key === 'Enter') checkQuizAnswer()">
                                 <button class="btn btn-primary" id="btn-quiz-check" onclick="checkQuizAnswer()">ส่งคำตอบ</button>
                             </div>
                             <div class="quiz-actions">
-                                <button class="quiz-link-btn" id="btn-quiz-hint" onclick="showQuizHint()">💡 ดูคำใบ้</button>
-                                <button class="quiz-link-btn" id="btn-quiz-solution" onclick="showQuizSolution()">🔑 ดูเฉลย</button>
+                                <button class="quiz-link-btn" id="btn-quiz-hint" onclick="showQuizHint()">ดูคำใบ้</button>
+                                <button class="quiz-link-btn" id="btn-quiz-solution" onclick="showQuizSolution()">ดูเฉลย</button>
                             </div>
                             <div class="quiz-feedback" id="quiz-feedback-area" style="display: none;"></div>
                         </div>
                         
                         <!-- Actions panel -->
                         <div class="action-panel">
-                            <button class="btn btn-outline" id="btn-prev" onclick="navigateTopic(-1)">⬅️ บทเรียนก่อนหน้า</button>
-                            <button class="btn btn-success" id="btn-complete-toggle" onclick="markCurrentTopicComplete()">ทำเครื่องหมายว่าเรียนรู้แล้ว ✓</button>
-                            <button class="btn btn-primary" id="btn-next" onclick="navigateTopic(1)">บทเรียนถัดไป ➡️</button>
+                            <button class="btn btn-outline" id="btn-prev" onclick="navigateTopic(-1)">&larr; บทเรียนก่อนหน้า</button>
+                            <button class="btn btn-success" id="btn-complete-toggle" onclick="markCurrentTopicComplete()">ทำเครื่องหมายว่าเรียนรู้แล้ว</button>
+                            <button class="btn btn-primary" id="btn-next" onclick="navigateTopic(1)">บทเรียนถัดไป &rarr;</button>
                         </div>
                     </div>
 
@@ -174,7 +194,7 @@
                     <div class="visual-card">
                         <!-- Upper Block: Flow Diagram / Visual Layout -->
                         <div class="visual-block-header">
-                            <h3>สถาปัตยกรรม / แผนภาพประกอบ (Architecture & Diagram)</h3>
+                            <h3>แผนภาพประกอบ (Architecture & Diagram)</h3>
                         </div>
                         <div class="visual-panel" id="diagram-area">
                             <!-- Dynamic SVG or CSS-based diagram -->

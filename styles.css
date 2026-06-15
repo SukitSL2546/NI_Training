@@ -7,20 +7,20 @@
     --bg-workspace: #f8fafc; /* Light Slate page background */
     --bg-card: #ffffff; /* Crisp white cards */
     --bg-code: #0f172a; /* Dark background for code syntax */
-    
+
     --border-grey: #e2e8f0;
     --border-active: #2b5c8f;
-    
+
     --text-primary: #1e293b;
     --text-secondary: #475569;
     --text-muted: #94a3b8;
     --text-light: #f8fafc;
-    
+
     --accent-blue: #3b82f6;
     --accent-success: #10b981;
     --accent-warning: #f59e0b;
     --accent-error: #ef4444;
-    
+
     --sidebar-width: 320px;
     --header-height: 70px;
     --border-radius: 8px;
@@ -540,19 +540,20 @@ h1 {
 }
 
 .visual-panel {
-    min-height: 280px;
+    min-height: 210px;
     display: flex;
     justify-content: center;
     align-items: center;
-    padding: 24px;
+    padding: 18px;
     overflow: hidden;
 }
 
 .visual-panel svg {
-    max-width: 100%;
-    max-height: 100%;
+    display: block;
+    width: 100%;
+    height: 100%;
     box-sizing: border-box;
-    padding: 10px;
+    overflow: visible;
 }
 
 .code-panel {
@@ -584,6 +585,7 @@ h1 {
 .diagram-svg {
     width: 100%;
     height: 100%;
+    shape-rendering: geometricPrecision;
 }
 
 .dia-box {
@@ -591,12 +593,29 @@ h1 {
     stroke: var(--bg-corporate-light);
     stroke-width: 1.5;
     rx: 4;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1), fill 0.2s ease, stroke 0.2s ease, stroke-width 0.2s ease, filter 0.25s ease;
+    transform-box: fill-box;
+    transform-origin: center;
 }
 
 .dia-box.active {
-    fill: rgba(59, 130, 246, 0.08);
+    fill: rgba(59, 130, 246, 0.06);
     stroke: var(--accent-blue);
     stroke-width: 2;
+}
+
+/* Hover effects for diagram boxes */
+.dia-box:hover {
+    transform: translateY(-4px);
+    stroke: var(--accent-blue);
+    stroke-width: 2.2px;
+    fill: #ffffff;
+    cursor: pointer;
+    filter: drop-shadow(0px 5px 8px rgba(15, 30, 54, 0.12));
+}
+
+.dia-box.active:hover {
+    fill: rgba(59, 130, 246, 0.12);
 }
 
 .dia-text {
@@ -604,12 +623,51 @@ h1 {
     font-weight: 600;
     fill: var(--bg-corporate-dark);
     text-anchor: middle;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-box: fill-box;
+    transform-origin: center;
+    pointer-events: none; /* Let hovers pass through to the rect behind it */
 }
 
 .dia-text-sub {
     font-size: 9px;
     fill: var(--text-secondary);
     text-anchor: middle;
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-box: fill-box;
+    transform-origin: center;
+    pointer-events: none;
+}
+
+/* Make text translate up in sync with the hovered box */
+.dia-box:hover + .dia-text,
+.dia-box:hover + .dia-text-sub,
+.dia-box:hover + .dia-text + .dia-text-sub {
+    transform: translateY(-4px);
+}
+
+/* Group translation for multi-element components (e.g. Tables) */
+.dia-group {
+    transition: transform 0.25s cubic-bezier(0.34, 1.56, 0.64, 1);
+    transform-box: fill-box;
+    transform-origin: center;
+}
+
+.dia-group:hover {
+    transform: translateY(-4px);
+}
+
+.dia-group:hover .dia-box {
+    transform: none;
+    stroke: var(--accent-blue);
+    stroke-width: 2.2px;
+    fill: #ffffff;
+    filter: drop-shadow(0px 5px 8px rgba(15, 30, 54, 0.12));
+}
+
+.dia-group:hover .dia-text,
+.dia-group:hover .dia-text-sub {
+    transform: none !important;
 }
 
 .dia-arrow {
@@ -730,12 +788,51 @@ h1 {
 /* ==========================================================================
    Responsive adaptivity
    ========================================================================== */
+/* ==========================================================================
+   Sidebar Overlay Backdrop & Animations
+   ========================================================================== */
+.sidebar-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    pointer-events: none;
+}
+
+@keyframes fadeInSlideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-8px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.quiz-feedback {
+    animation: fadeInSlideDown 0.25s ease-out;
+}
+
+.tip-block {
+    animation: fadeInSlideDown 0.3s ease-out;
+}
+
+/* ==========================================================================
+   Responsive adaptivity
+   ========================================================================== */
 @media (max-width: 1150px) {
     .content-grid {
         grid-template-columns: 1fr;
     }
     .visual-panel {
-        height: 200px;
+        min-height: 210px;
     }
     .code-panel {
         height: 300px;
@@ -743,22 +840,63 @@ h1 {
 }
 
 @media (max-width: 768px) {
-    .app-layout {
-        flex-direction: column;
-    }
     .sidebar {
-        width: 100%;
-        position: static;
-        border-right: none;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        width: 280px;
+        position: fixed;
+        z-index: 1000;
+        box-shadow: 5px 0 15px rgba(0, 0, 0, 0.15);
     }
     .sidebar-collapsed .sidebar {
-        display: none !important;
+        transform: translateX(-100%);
     }
     .workspace {
-        margin-left: 0;
+        margin-left: 0 !important;
     }
     .workspace-header {
         padding: 0 20px;
     }
+    .app-layout:not(.sidebar-collapsed) .sidebar-overlay {
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+}
+
+@media (max-width: 600px) {
+    .workspace-header {
+        height: auto;
+        padding: 15px 20px;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 12px;
+    }
+    .header-left {
+        width: 100%;
+    }
+    .header-right {
+        width: 100%;
+    }
+    .search-box {
+        width: 100%;
+    }
+    .action-panel {
+        flex-direction: column;
+        gap: 10px;
+        align-items: stretch;
+    }
+    .action-panel .btn {
+        width: 100%;
+        text-align: center;
+    }
+}
+
+/* Full-width layout for Topic 15 (API Comparison) */
+.content-grid.full-width-layout {
+    grid-template-columns: 1fr;
+}
+.full-width-layout .code-panel {
+    height: 480px;
+}
+.full-width-layout .visual-panel {
+    min-height: 340px;
 }

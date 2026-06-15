@@ -1,5 +1,5 @@
 // ==========================================================================
-// Syllabus Database (12 Topics)
+// Syllabus Database (15 Topics)
 // ==========================================================================
 const syllabusData = {
     stl_intro: {
@@ -8,7 +8,7 @@ const syllabusData = {
         narrative: `
             <h4>ภาพรวมของ Semiconductor Test Library (STL)</h4>
             <p><strong>STL</strong> คือชุดคลาสและอ็อบเจกต์สำเร็จรูป (C# class library) ที่ถูกพัฒนาขึ้นโดยความร่วมมือระหว่าง NI และ Analog Devices เพื่อทำหน้าที่เป็นสถาปัตยกรรมระดับซอฟต์แวร์ตัวกลาง (Middle Layer) ที่เชื่อมประสานระหว่าง TestStand TSM (ตัวจัดการระบบเทส) กับไดรเวอร์ควบคุมฮาร์ดแวร์ระดับต่ำ (เช่น NI-DCPower และ NI-Digital Pattern)</p>
-            
+
             <h4>ปัญหาเดิม (ถ้าเขียนโค้ดคุมฮาร์ดแวร์ตรงๆ):</h4>
             <ul>
                 <li>โค้ดมีความซับซ้อนสูงเมื่อต้องจัดการระบบทดสอบหลายไซต์งานพร้อมกัน (Multisite) วิศวกรต้องจัดการเปิด/ปิดเซสชันและวนลูปประมวลผลข้อมูลวัดด้วยตนเอง</li>
@@ -16,7 +16,7 @@ const syllabusData = {
             </ul>
 
             <div class="tip-block">
-                <div class="tip-block-title">💡 สิ่งที่ STL เข้ามาช่วยแก้ปัญหา</div>
+                <div class="tip-block-title">สิ่งที่ STL เข้ามาช่วยแก้ปัญหา</div>
                 <p>STL ทำการซ่อนความซับซ้อนเหล่านั้นไว้หลังเมธอดที่เรียกใช้งานง่าย เช่น <code>ForceVoltage()</code> หรือ <code>MeasureAndPublishCurrent()</code> วิศวกรแค่ส่งอาร์กิวเมนต์สั้นๆ ที่ต้องการ ระบบจะรับไปแปลงสัญญาณและสั่งการบอร์ดฮาร์ดแวร์เดี่ยวๆ ทั้งหมดให้ขนานกันโดยอัตโนมัติ</p>
             </div>
         `,
@@ -40,19 +40,19 @@ namespace ADIProjectTemplate.TestModules
                 <!-- Layers -->
                 <rect x="50" y="10" width="300" height="40" class="dia-box active" />
                 <text x="200" y="34" class="dia-text" style="fill: #1e293b;">TestStand TSM (ระดับบนสุด)</text>
-                
-                <path d="M200 50v20" class="dia-arrow" marker-end="url(#arrow)" />
-                
+
+                <path d="M200 53v7" class="dia-arrow" marker-end="url(#arrow)" />
+
                 <rect x="50" y="70" width="300" height="40" class="dia-box" style="fill: #2b5c8f; stroke: #2b5c8f;" />
                 <text x="200" y="94" class="dia-text" style="fill: #ffffff;">Semiconductor Test Library (STL)</text>
-                
-                <path d="M200 110v20" class="dia-arrow" marker-end="url(#arrow)" />
-                
+
+                <path d="M200 113v7" class="dia-arrow" marker-end="url(#arrow)" />
+
                 <rect x="50" y="130" width="300" height="30" class="dia-box" />
                 <text x="200" y="148" class="dia-text">NI Hardware Drivers (niDCPower, niDigital)</text>
-                
-                <path d="M200 160v20" class="dia-arrow" marker-end="url(#arrow)" />
-                
+
+                <path d="M200 163v7" class="dia-arrow" marker-end="url(#arrow)" />
+
                 <rect x="50" y="180" width="300" height="30" class="dia-box" style="fill: #64748b; stroke: #64748b;" />
                 <text x="200" y="198" class="dia-text" style="fill: #ffffff;">บอร์ดฮาร์ดแวร์เครื่องวัดจริง (Physical Hardware)</text>
             </svg>
@@ -64,7 +64,7 @@ namespace ADIProjectTemplate.TestModules
         narrative: `
             <h4>หลักการทำ Abstraction (การสั่งงานผ่านหน้าที่)</h4>
             <p><strong>Instrument Abstraction</strong> คือหัวใจสำคัญของการแยกส่วนการเขียนโปรแกรมทดสอบ (Test Logic) ออกจากชนิดการ์ดจริง (Hardware Model) โดยวิศวกรจะสั่งงานผ่าน <strong>"ชื่อพินและชนิดเครื่องมือวัด"</strong> แทนการระบุรุ่นหรือเลขช่องแชนเนลในโค้ด</p>
-            
+
             <h4>ตัวอย่างการเปรียบเทียบเชิงวิศวกรรม:</h4>
             <ul>
                 <li><strong>หากไม่มี Abstraction:</strong> คุณสั่งงานบอร์ดโมเดลเก่า <code>PXIe-6570 แชนเนล 4 จ่ายไฟ 3V</code> เมื่อย้ายโค้ดไปรันเครื่องใหม่ที่ใช้บอร์ดรุ่นความหนาแน่นสูง <code>PXIe-6571</code> โค้ดจะพังทันที</li>
@@ -72,7 +72,7 @@ namespace ADIProjectTemplate.TestModules
             </ul>
 
             <div class="tip-block">
-                <div class="tip-block-title">💡 ประโยชน์ในโปรเจกต์จริง</div>
+                <div class="tip-block-title">ประโยชน์ในโปรเจกต์จริง</div>
                 <p>ทำให้โค้ด C# ในไฟล์อย่าง <code>Continuity.cs</code> และ <code>Leakage.cs</code> สามารถนำไปรันบนระบบทดสอบตู้ใดก็ได้ในโรงงานผลิต โดยไม่ต้องแก้ซอร์สโค้ดและคอมไพล์ใหม่แม้แต่บรรทัดเดียวเมื่อมีการปรับย้ายการ์ดฮาร์ดแวร์</p>
             </div>
         `,
@@ -92,30 +92,31 @@ dcPowerPinSessions.ForceVoltage(1.8, currentLimit);`,
                 <!-- C# Code Pin Reference -->
                 <rect x="30" y="10" width="100" height="40" class="dia-box active" />
                 <text x="80" y="34" class="dia-text" style="fill: #2b5c8f;">พิน CS</text>
-                
-                <path d="M130 30h40" class="dia-arrow" />
-                
+
+                <path d="M134 30h32" class="dia-arrow" />
+
                 <!-- Abstraction Layer -->
                 <rect x="170" y="10" width="200" height="40" class="dia-box" style="fill: #f1f5f9; stroke: #2b5c8f;" />
                 <text x="270" y="34" class="dia-text">Pin Map (.pinmap)</text>
-                
+
                 <!-- Branching Lines based on Pinmap configuration -->
-                <path d="M270 50v40" class="dia-arrow" marker-end="url(#arrow)" />
-                <path d="M270 70h-90v20" class="dia-arrow" marker-end="url(#arrow)" />
-                <path d="M270 70h90v20" class="dia-arrow" marker-end="url(#arrow)" />
-                
+                <path d="M270 53v17" class="dia-arrow" />
+                <path d="M270 70h-180v10" class="dia-arrow" marker-end="url(#arrow)" />
+                <path d="M270 70h-70v10" class="dia-arrow" marker-end="url(#arrow)" />
+                <path d="M270 70h40v10" class="dia-arrow" marker-end="url(#arrow)" />
+
                 <!-- Physical Cards -->
                 <rect x="40" y="90" width="100" height="40" class="dia-box" />
-                <text x="90" y="110" class="dia-text">บอร์ดสล็อต 2</text>
-                <text x="90" y="122" class="dia-text-sub">แชนเนล 0 (GP3)</text>
-                
+                <text x="90" y="108" class="dia-text">บอร์ดสล็อต 2</text>
+                <text x="90" y="121" class="dia-text-sub">แชนเนล 0 (GP3)</text>
+
                 <rect x="150" y="90" width="100" height="40" class="dia-box" />
-                <text x="200" y="110" class="dia-text">บอร์ดสล็อต 5</text>
-                <text x="200" y="122" class="dia-text-sub">แชนเนล 12 (GP4)</text>
-                
+                <text x="200" y="108" class="dia-text">บอร์ดสล็อต 5</text>
+                <text x="200" y="121" class="dia-text-sub">แชนเนล 12 (GP4)</text>
+
                 <rect x="260" y="90" width="100" height="40" class="dia-box" style="fill: #e2e8f0;" />
                 <text x="310" y="115" class="dia-text" style="fill: #64748b;">บอร์ดประเภทอื่น</text>
-                
+
                 <text x="200" y="180" class="dia-text" style="fill: #0f1e36;">เปลี่ยนเครื่องเทสหรือย้ายพิน = แก้ไขแค่ไฟล์ .pinmap</text>
                 <text x="200" y="195" class="dia-text-sub">โดยไม่ต้องแตะต้องหรือคอมไพล์โค้ด C# ใหม่</text>
             </svg>
@@ -127,7 +128,7 @@ dcPowerPinSessions.ForceVoltage(1.8, currentLimit);`,
         narrative: `
             <h4>หัวหน้างานดึงข้อมูลและเชื่อมเซสชัน</h4>
             <p><strong>TSMSessionManager</strong> คือคลาสและตัวจัดการหลักในกล่องเครื่องมือของ STL ที่ทำหน้าที่ในการดึงข้อมูลช่องทางการสื่อสารกับบอร์ดฮาร์ดแวร์ขึ้นมาใช้งาน โดยดึงข้อมูลเชื่อมโยงจากตัวแปร <code>tsmContext</code> ของ TestStand</p>
-            
+
             <h4>หน้าที่สำคัญในการเขียนโค้ด:</h4>
             <ul>
                 <li><strong>สืบค้นและระบุที่อยู่ฮาร์ดแวร์:</strong> นำข้อมูลรายชื่อพินที่เราต้องการใช้ เช่น <code>"SupplyPins"</code> ไปเปิดตรวจสอบทะเบียนในไฟล์ <code>.pinmap</code> ย้อนหลังว่าผูกอยู่กับการ์ดสล็อตใด</li>
@@ -136,7 +137,7 @@ dcPowerPinSessions.ForceVoltage(1.8, currentLimit);`,
             </ul>
 
             <div class="tip-block">
-                <div class="tip-block-title">💡 เหตุผลที่ต้องเรียกใช้เป็นตัวแรกในฟังก์ชัน</div>
+                <div class="tip-block-title">เหตุผลที่ต้องเรียกใช้เป็นตัวแรกในฟังก์ชัน</div>
                 <p>เพราะตัวแปร <code>tsmContext</code> เป็นเพียงตัวแปรเก็บข้อมูลสภาพแวดล้อมรวมเฉยๆ การจะสั่งจ่ายไฟเลี้ยงได้เราต้องมีวัตถุที่จะคุยกับการ์ดได้จริง ซึ่ง <code>TSMSessionManager</code> คือคนจองและดึงวัตถุนั้นขึ้นมาให้เราใช้งานครับ</p>
             </div>
         `,
@@ -145,7 +146,7 @@ public static void TS_Leakage(ISemiconductorModuleContext tsmContext, string[] p
 {
     // สร้าง sessionManager โดยนำส่ง Context ของ TSM เข้าไป
     var sessionManager = new TSMSessionManager(tsmContext);
-    
+
     // หลังจากนี้เราจะใช้ตัวแปร sessionManager ในการดึงเซสชันบอร์ดต่างๆ
 }`,
         diagram: `
@@ -159,25 +160,26 @@ public static void TS_Leakage(ISemiconductorModuleContext tsmContext, string[] p
                 <rect x="30" y="40" width="100" height="50" class="dia-box" style="fill: #e2e8f0;" />
                 <text x="80" y="65" class="dia-text">tsmContext</text>
                 <text x="80" y="78" class="dia-text-sub">(จาก TestStand)</text>
-                
-                <path d="M130 65h40" class="dia-arrow" marker-end="url(#arrow)" />
-                
+
+                <path d="M133 65h31" class="dia-arrow" marker-end="url(#arrow)" />
+
                 <!-- TSMSessionManager -->
                 <rect x="170" y="30" width="120" height="70" class="dia-box active" />
                 <text x="230" y="62" class="dia-text" style="fill: #2b5c8f;">TSMSessionManager</text>
                 <text x="230" y="78" class="dia-text-sub">(ตัวจัดการดึงเซสชัน)</text>
-                
-                <path d="M290 65h40" class="dia-arrow" marker-end="url(#arrow)" />
-                
+
+                <path d="M293 65h11v-35h16" class="dia-arrow" marker-end="url(#arrow)" />
+                <path d="M293 65h11v5h16" class="dia-arrow" marker-end="url(#arrow)" />
+
                 <!-- Output Bundles -->
-                <rect x="330" y="15" width="55" height="30" class="dia-box" />
-                <text x="357" y="34" class="dia-text" style="font-size: 8px;">SMU Bundle</text>
-                
-                <rect x="330" y="55" width="55" height="30" class="dia-box" />
-                <text x="357" y="74" class="dia-text" style="font-size: 8px;">Digital Bundle</text>
-                
+                <rect x="330" y="15" width="105" height="30" class="dia-box" />
+                <text x="382.5" y="34" class="dia-text" style="font-size: 8px;">SMU Bundle</text>
+
+                <rect x="330" y="55" width="105" height="30" class="dia-box" />
+                <text x="382.5" y="74" class="dia-text" style="font-size: 8px;">Digital Bundle</text>
+
                 <!-- Pinmap lookup indicator -->
-                <path d="M230 100v30" class="dia-arrow" marker-end="url(#arrow)" />
+                <path d="M230 103v17" class="dia-arrow" marker-end="url(#arrow)" />
                 <rect x="170" y="130" width="120" height="30" class="dia-box" style="fill: #fffbeb; stroke: #f59e0b;" />
                 <text x="230" y="148" class="dia-text" style="fill: #d97706; font-size: 10px;">เปิดสืบค้นใน ADI.pinmap</text>
             </svg>
@@ -189,7 +191,7 @@ public static void TS_Leakage(ISemiconductorModuleContext tsmContext, string[] p
         narrative: `
             <h4>ความหมายและพฤติกรรมของ Session Bundle</h4>
             <p><strong>Session Bundle</strong> คือวัตถุอ็อบเจกต์พิเศษที่ทำหน้าที่ <strong>"มัดรวมและห่อหุ้มเซสชันควบคุมฮาร์ดแวร์"</strong> ทั้งหมดที่ผูกอยู่กับพินทดสอบที่เราสั่งงาน</p>
-            
+
             <h4>เปรียบเหมือน "วอสื่อสารกลุ่ม" (Group Walkie-Talkie):</h4>
             <p>หากเราต้องการสั่งจ่ายไฟ 3.3V ให้กับพิน <code>Vcc</code> ของชิป 4 ตัวพร้อมกัน (Multisite 4 Sites) บอร์ด SMU จริงจะต้องจ่ายไฟออกทั้งหมด 4 ช่องแชนเนล:</p>
             <ul>
@@ -198,7 +200,7 @@ public static void TS_Leakage(ISemiconductorModuleContext tsmContext, string[] p
             </ul>
 
             <div class="tip-block">
-                <div class="tip-block-title">💡 ประเภทของ Bundle ในโปรเจกต์</div>
+                <div class="tip-block-title"> ประเภทของ Bundle ในโปรเจกต์</div>
                 <ul>
                     <li><code>DCPowerSessionsBundle</code>: ใช้ควบคุมสั่งการกลุ่มบอร์ดจ่ายกระแสละเอียด (SMU)</li>
                     <li><code>DigitalSessionsBundle</code>: ใช้ควบคุมสั่งการกลุ่มบอร์ดดิจิทัลและ PPMU</li>
@@ -219,35 +221,35 @@ smuPins.ForceVoltage(3.3, currentLimit);`,
                     </marker>
                 </defs>
                 <!-- User command -->
-                <rect x="20" y="30" width="130" height="40" class="dia-box active" />
-                <text x="85" y="54" class="dia-text" style="fill: #2b5c8f; font-size: 10px;">smuPins.ForceVoltage(3.3)</text>
-                <text x="85" y="65" class="dia-text-sub" style="font-size: 8px;">(วิศวกรสั่งงาน 1 คำสั่ง)</text>
-                
-                <path d="M150 50h40" class="dia-arrow" marker-end="url(#arrow)" />
-                
+                <rect x="10" y="30" width="145" height="40" class="dia-box active" />
+                <text x="82.5" y="48" class="dia-text" style="fill: #2b5c8f; font-size: 10px;">smuPins.ForceVoltage(3.3)</text>
+                <text x="82.5" y="60" class="dia-text-sub" style="font-size: 8px;">(วิศวกรสั่งงาน 1 คำสั่ง)</text>
+
+                <path d="M158 50h12" class="dia-arrow" marker-end="url(#arrow)" />
+
                 <!-- Session Bundle -->
-                <rect x="190" y="20" width="90" height="180" class="dia-box" style="fill: #f1f5f9; stroke: #2b5c8f;" />
-                <text x="235" y="40" class="dia-text">Session Bundle</text>
-                <text x="235" y="52" class="dia-text-sub">(กล่องมัดรวมของ STL)</text>
-                
+                <rect x="180" y="20" width="130" height="180" class="dia-box" style="fill: #f1f5f9; stroke: #2b5c8f;" />
+                <text x="245" y="40" class="dia-text">Session Bundle</text>
+                <text x="245" y="52" class="dia-text-sub">(กล่องมัดรวมของ STL)</text>
+
                 <!-- Internal Routing to Channels -->
-                <path d="M280 50h40" class="dia-arrow" marker-end="url(#arrow)" />
-                <path d="M280 50h20v40h20" class="dia-arrow" marker-end="url(#arrow)" />
-                <path d="M280 50h20v80h20" class="dia-arrow" marker-end="url(#arrow)" />
-                <path d="M280 50h20v120h20" class="dia-arrow" marker-end="url(#arrow)" />
-                
+                <path d="M313 47.5h17" class="dia-arrow" marker-end="url(#arrow)" />
+                <path d="M313 47.5h7v40h10" class="dia-arrow" marker-end="url(#arrow)" />
+                <path d="M313 47.5h7v80h10" class="dia-arrow" marker-end="url(#arrow)" />
+                <path d="M313 47.5h7v120h10" class="dia-arrow" marker-end="url(#arrow)" />
+
                 <!-- Channels output -->
-                <rect x="320" y="35" width="65" height="25" class="dia-box" />
-                <text x="352.5" y="50" class="dia-text" style="font-size: 8px; text-anchor: middle;">SMU Ch 0 (3.3V)</text>
-                
-                <rect x="320" y="75" width="65" height="25" class="dia-box" />
-                <text x="352.5" y="90" class="dia-text" style="font-size: 8px; text-anchor: middle;">SMU Ch 1 (3.3V)</text>
-                
-                <rect x="320" y="115" width="65" height="25" class="dia-box" />
-                <text x="352.5" y="130" class="dia-text" style="font-size: 8px; text-anchor: middle;">SMU Ch 2 (3.3V)</text>
-                
-                <rect x="320" y="155" width="65" height="25" class="dia-box" />
-                <text x="352.5" y="170" class="dia-text" style="font-size: 8px; text-anchor: middle;">SMU Ch 3 (3.3V)</text>
+                <rect x="340" y="35" width="75" height="25" class="dia-box" />
+                <text x="377.5" y="50" class="dia-text" style="font-size: 8px; text-anchor: middle;">SMU Ch 0 (3.3V)</text>
+
+                <rect x="340" y="75" width="75" height="25" class="dia-box" />
+                <text x="377.5" y="90" class="dia-text" style="font-size: 8px; text-anchor: middle;">SMU Ch 1 (3.3V)</text>
+
+                <rect x="340" y="115" width="75" height="25" class="dia-box" />
+                <text x="377.5" y="130" class="dia-text" style="font-size: 8px; text-anchor: middle;">SMU Ch 2 (3.3V)</text>
+
+                <rect x="340" y="155" width="75" height="25" class="dia-box" />
+                <text x="377.5" y="170" class="dia-text" style="font-size: 8px; text-anchor: middle;">SMU Ch 3 (3.3V)</text>
             </svg>
         `
     },
@@ -257,7 +259,7 @@ smuPins.ForceVoltage(3.3, currentLimit);`,
         narrative: `
             <h4>การบริหารจัดเก็บข้อมูลแยกรายไซต์งานทดสอบ</h4>
             <p>ในการทดสอบแบบคู่ขนาน (Multisite Testing) ผลลัพธ์ตัวเลขที่วัดได้จากชิปแต่ละตัวจะต้องถูกแยกประเภทจากกันชัดเจน (เช่น ชิปตัวที่ 0 วัดค่ารั่วได้ 5µA, ตัวที่ 1 วัดได้ 1.2mA ซึ่งสอบตก)</p>
-            
+
             <h4>กล่องเก็บตารางข้อมูลแยกรายตัว:</h4>
             <ul>
                 <li><strong>SiteData&lt;T&gt;:</strong> เปรียบเหมือนใบสรุปคะแนนรวมวิชาของนักเรียนในห้อง (1 คนมี 1 คะแนน) สำหรับเก็บค่าสรุปเดี่ยวของชิปแต่ละไซต์งานทดสอบ เช่น ผล Pass/Fail หรืออุณหภูมิรวมชิป</li>
@@ -271,7 +273,7 @@ smuPins.ForceVoltage(3.3, currentLimit);`,
             </ul>
 
             <div class="tip-block">
-                <div class="tip-block-title">💡 เหตุผลที่ต้องใช้ SiteData ในโค้ด C#</div>
+                <div class="tip-block-title"> เหตุผลที่ต้องใช้ SiteData ในโค้ด C#</div>
                 <p>เพราะเมธอดของ TestStand และระบบจัดเก็บรายงานผล Datalog ถูกกำหนดโครงสร้างข้อมูลไว้ว่า เวลาส่งรายงานค่าวัดกลับขึ้นไปหา TSM คุณต้องส่งในรูปแบบของอ็อบเจกต์ <code>SiteData</code> เพื่อให้ระบบนำค่าไปป้อนรีพอร์ตสรุปได้ตรงไซต์ชิปที่วัดจริงครับ</p>
             </div>
         `,
@@ -284,31 +286,33 @@ foreach (int site in tsmContext.ActiveSites)
 {
     // ดึงค่าแรงดันเฉพาะของชิปตัวที่กำลังรัน (site)
     double siteVoltage = testVoltageResults.GetValue(site);
-    
+
     if (siteVoltage < 3.0) {
         // ดำเนินการคัดตกชิปตัวนั้นๆ
     }
 }`,
         diagram: `
             <svg viewBox="-30 -20 460 260" width="100%" height="100%" class="diagram-svg">
-                <!-- SiteData structure box -->
-                <rect x="50" y="20" width="300" height="150" class="dia-box" style="fill: #f8fafc; stroke: #2b5c8f;" />
-                <text x="200" y="40" class="dia-text">โครงสร้างอ็อบเจกต์ SiteData&lt;double&gt;</text>
-                <line x1="50" y1="50" x2="350" y2="50" style="stroke: #e2e8f0; stroke-width: 1.5;" />
-                
-                <!-- Table headers -->
-                <text x="120" y="75" class="dia-text" style="fill: #475569;">Site Number</text>
-                <text x="280" y="75" class="dia-text" style="fill: #475569;">Value (ค่าวัดที่ได้)</text>
-                <line x1="50" y1="85" x2="350" y2="85" style="stroke: #e2e8f0; stroke-width: 1.5;" />
-                
-                <!-- Table Rows -->
-                <text x="120" y="110" class="dia-text">Site 0</text>
-                <text x="280" y="110" class="dia-text" style="fill: #10b981;">1.25 mA (Pass)</text>
-                <line x1="50" y1="120" x2="350" y2="120" style="stroke: #f1f5f9; stroke-width: 1;" />
-                
-                <text x="120" y="140" class="dia-text">Site 1</text>
-                <text x="280" y="140" class="dia-text" style="fill: #ef4444;">18.42 mA (Fail)</text>
-                
+                <g class="dia-group">
+                    <!-- SiteData structure box -->
+                    <rect x="50" y="20" width="300" height="150" class="dia-box" style="fill: #f8fafc; stroke: #2b5c8f;" />
+                    <text x="200" y="40" class="dia-text">โครงสร้างอ็อบเจกต์ SiteData&lt;double&gt;</text>
+                    <line x1="50" y1="50" x2="350" y2="50" style="stroke: #e2e8f0; stroke-width: 1.5;" />
+
+                    <!-- Table headers -->
+                    <text x="120" y="75" class="dia-text" style="fill: #475569;">Site Number</text>
+                    <text x="280" y="75" class="dia-text" style="fill: #475569;">Value (ค่าวัดที่ได้)</text>
+                    <line x1="50" y1="85" x2="350" y2="85" style="stroke: #e2e8f0; stroke-width: 1.5;" />
+
+                    <!-- Table Rows -->
+                    <text x="120" y="110" class="dia-text">Site 0</text>
+                    <text x="280" y="110" class="dia-text" style="fill: #10b981;">1.25 mA (Pass)</text>
+                    <line x1="50" y1="120" x2="350" y2="120" style="stroke: #f1f5f9; stroke-width: 1;" />
+
+                    <text x="120" y="140" class="dia-text">Site 1</text>
+                    <text x="280" y="140" class="dia-text" style="fill: #ef4444;">18.42 mA (Fail)</text>
+                </g>
+
                 <!-- Indicator of TSM publish -->
                 <text x="200" y="200" class="dia-text-sub" style="font-weight: 600;">ส่งตารางชุดนี้ไปที่ TestStand เพื่อคัด Binning ชิปดี/เสีย</text>
             </svg>
@@ -320,7 +324,7 @@ foreach (int site in tsmContext.ActiveSites)
         narrative: `
             <h4>ขั้นตอนควบคุมและการจ่ายพลังงานไฟฟ้าผ่าน SMU</h4>
             <p>ในการสั่งงานการ์ด **SMU (Source Measure Unit)** หรือบอร์ดจ่ายกระแสตรงละเอียดของ NI จะมีลำดับขึ้นตอนระดับฮาร์ดแวร์เพื่อความถูกต้องและปลอดภัยของอุปกรณ์เสมอ ดังนี้:</p>
-            
+
             <h4>ขั้นตอนการจ่ายไฟแบบมาตรฐาน (Force Voltage Sequence):</h4>
             <ol>
                 <li><strong>Abort:</strong> ยกเลิกคำสั่งหรือคิวค้างเดิมของแชนเนลบอร์ด (<code>Control.Abort()</code>) เพื่อเคลียร์สถานะเริ่มต้น</li>
@@ -331,7 +335,7 @@ foreach (int site in tsmContext.ActiveSites)
             </ol>
 
             <div class="tip-block">
-                <div class="tip-block-title">⚠️ ข้อระวังในมุมวิศวกร</div>
+                <div class="tip-block-title">ข้อระวังในมุมวิศวกร</div>
                 <p>การข้ามขั้นตอน Abort หรือการไม่ตั้งค่าหน่วงเวลาการหน่วงประจุ (Source Delay) จะส่งผลโดยตรงต่อการอ่านค่ากระแสไฟฟ้าผิดพลาดจากการวัดสัญญาณกวนชั่วขณะ หรืออาจสร้างความเสียหาย (Electrical Overstress) แก่พินชิปได้</p>
             </div>
         `,
@@ -355,45 +359,45 @@ dcOutput.Control.Initiate();                                                 // 
                 <!-- Flow columns -->
                 <g transform="translate(10, 10)">
                     <rect x="0" y="10" width="90" height="30" class="dia-box" />
-                    <text x="45" y="28" class="dia-text" style="font-size: 10px;">1. Abort</text>
-                    <text x="45" y="38" class="dia-text-sub" style="font-size: 8px;">เคลียร์ระบบ</text>
-                    
-                    <path d="M90 25h20" class="dia-arrow" marker-end="url(#arrow)" />
-                    
+                    <text x="45" y="23" class="dia-text" style="font-size: 10px;">1. Abort</text>
+                    <text x="45" y="33" class="dia-text-sub" style="font-size: 8px;">เคลียร์ระบบ</text>
+
+                    <path d="M93 25h11" class="dia-arrow" marker-end="url(#arrow)" />
+
                     <rect x="110" y="10" width="90" height="30" class="dia-box" />
-                    <text x="155" y="28" class="dia-text" style="font-size: 10px;">2. Connect</text>
-                    <text x="155" y="38" class="dia-text-sub" style="font-size: 8px;">สับสวิตช์รีเลย์</text>
-                    
-                    <path d="M200 25h20" class="dia-arrow" marker-end="url(#arrow)" />
-                    
+                    <text x="155" y="23" class="dia-text" style="font-size: 10px;">2. Connect</text>
+                    <text x="155" y="33" class="dia-text-sub" style="font-size: 8px;">สับสวิตช์รีเลย์</text>
+
+                    <path d="M203 25h11" class="dia-arrow" marker-end="url(#arrow)" />
+
                     <rect x="220" y="10" width="90" height="30" class="dia-box" />
-                    <text x="265" y="28" class="dia-text" style="font-size: 10px;">3. Configure</text>
-                    <text x="265" y="38" class="dia-text-sub" style="font-size: 8px;">ตั้งแรงดัน/Limit</text>
+                    <text x="265" y="23" class="dia-text" style="font-size: 10px;">3. Configure</text>
+                    <text x="265" y="33" class="dia-text-sub" style="font-size: 8px;">ตั้งแรงดัน/Limit</text>
                 </g>
-                
-                <path d="M285 55v25" class="dia-arrow" marker-end="url(#arrow)" />
-                
+
+                <path d="M275 53v31" class="dia-arrow" marker-end="url(#arrow)" />
+
                 <g transform="translate(10, 80)">
                     <rect x="220" y="10" width="90" height="30" class="dia-box" />
-                    <text x="265" y="28" class="dia-text" style="font-size: 10px;">4. Source Delay</text>
-                    <text x="265" y="38" class="dia-text-sub" style="font-size: 8px;">หน่วงเวลารอไฟนิ่ง</text>
-                    
-                    <path d="M220 25h-20" class="dia-arrow" marker-end="url(#arrow)" />
-                    
+                    <text x="265" y="23" class="dia-text" style="font-size: 10px;">4. Source Delay</text>
+                    <text x="265" y="33" class="dia-text-sub" style="font-size: 8px;">หน่วงเวลารอไฟนิ่ง</text>
+
+                    <path d="M217 25h-11" class="dia-arrow" marker-end="url(#arrow)" />
+
                     <rect x="110" y="10" width="90" height="30" class="dia-box" />
-                    <text x="155" y="28" class="dia-text" style="font-size: 10px;">5. Enable Out</text>
-                    <text x="155" y="38" class="dia-text-sub" style="font-size: 8px;">เปิดสิทธิ์แชนเนล</text>
-                    
-                    <path d="M110 25h-20" class="dia-arrow" marker-end="url(#arrow)" />
-                    
+                    <text x="155" y="23" class="dia-text" style="font-size: 10px;">5. Enable Out</text>
+                    <text x="155" y="33" class="dia-text-sub" style="font-size: 8px;">เปิดสิทธิ์แชนเนล</text>
+
+                    <path d="M107 25h-11" class="dia-arrow" marker-end="url(#arrow)" />
+
                     <rect x="0" y="10" width="90" height="30" class="dia-box active" />
-                    <text x="45" y="28" class="dia-text" style="font-size: 10px; fill: #2b5c8f;">6. Initiate</text>
-                    <text x="45" y="38" class="dia-text-sub" style="font-size: 8px;">จ่ายพลังงานจริง</text>
+                    <text x="45" y="23" class="dia-text" style="font-size: 10px; fill: #2b5c8f;">6. Initiate</text>
+                    <text x="45" y="33" class="dia-text-sub" style="font-size: 8px;">จ่ายพลังงานจริง</text>
                 </g>
-                
+
                 <rect x="80" y="150" width="240" height="40" class="dia-box" style="fill: #fdf2f8; stroke: #db2777;" />
-                <text x="200" y="168" class="dia-text" style="fill: #9d174d; font-size: 10px;">สำคัญมาก: Source Delay (หน่วงเวลาเสถียร)</text>
-                <text x="200" y="182" class="dia-text-sub" style="fill: #c91866;">ช่วยข้ามผลกวนของคลื่นกระเพื่อมไฟฟ้าช่วงแรก (Transient)</text>
+                <text x="200" y="166" class="dia-text" style="fill: #9d174d; font-size: 10px;">สำคัญมาก: Source Delay (หน่วงเวลาเสถียร)</text>
+                <text x="200" y="180" class="dia-text-sub" style="fill: #c91866;">ช่วยข้ามผลกวนของคลื่นกระเพื่อมไฟฟ้าช่วงแรก (Transient)</text>
             </svg>
         `
     },
@@ -403,7 +407,7 @@ dcOutput.Control.Initiate();                                                 // 
         narrative: `
             <h4>หลักการทำงานของบอร์ดดิจิทัลและหน่วยวัด PPMU</h4>
             <p>บอร์ดการ์ดดิจิทัลของ NI (เช่น <code>PXIe-6571</code>) นอกเหนือจากการรับส่งข้อมูลบิตความเร็วสูงแล้ว ด้านหลังของขั้วทดสอบทุกช่องแชนเนลจะมีโมดูลวัดขนาดจิ๋วที่ชื่อว่า **PPMU (Parametric Pin Measurement Unit)** ประจำอยู่ด้วย</p>
-            
+
             <h4>โฟลว์คำสั่งแบบใช้ PPMU จ่ายกระแส/แรงดันไฟฟ้าแยกตามพิน:</h4>
             <ul>
                 <li><strong>การตั้งค่า:</strong> สร้างออบเจกต์เก็บค่ากำหนดพินเฉพาะรายบุคคล เช่น <code>PPMUSettings</code> ระบุเป้าหมายแรงดัน ขีดจำกัดกระแสสูงสุด และช่วงหน้าต่างเวลารับข้อมูล (Aperture Time)</li>
@@ -412,7 +416,7 @@ dcOutput.Control.Initiate();                                                 // 
             </ul>
 
             <div class="tip-block">
-                <div class="tip-block-title">💡 การสลับโหมดบอร์ดดิจิทัล</div>
+                <div class="tip-block-title">การสลับโหมดบอร์ดดิจิทัล</div>
                 <p>ในการเขียนเทสบอร์ดดิจิทัลจะสลับสถานะได้ 2 รูปแบบหลัก: <strong>โหมด PPMU</strong> (ใช้วัดค่าพารามิเตอร์ระดับกระแสไฟเล็กๆ เช่น รั่วไหลหรือ Continuity) และ <strong>โหมด Pattern Burst</strong> (ใช้ส่งแพทเทิร์นรหัสข้อมูลสั่งงานการทำงานชิปแบบความเร็วสูง)</p>
             </div>
         `,
@@ -422,7 +426,7 @@ var ppmuForceSettings = new Dictionary<string, PPMUSettings>();
 
 // วนลูปตั้งค่าให้พินดิจิทัลแต่ละพินทำงานด้วยการตั้งค่าเฉพาะของตนเอง
 for (int i = 0; i < digitalTestPins.Count; i++) {
-    ppmuForceSettings[digitalTestPins[i]] = new PPMUSettings() { 
+    ppmuForceSettings[digitalTestPins[i]] = new PPMUSettings() {
         VoltageLevel = 0, // ตั้งแรงดัน 0V เป็นกราวด์ชั่วขณะ
         VoltageLimitHigh = ppmuPinVoltageLimitHigh,
         ApertureTime = apertureTime
@@ -441,22 +445,22 @@ ppmuPins.ForceVoltage(ppmuForceSettings);`,
                 <rect x="30" y="20" width="130" height="150" class="dia-box" style="fill: #f8fafc; stroke: #2b5c8f;" />
                 <text x="95" y="40" class="dia-text">บอร์ดการ์ดดิจิทัล (6571)</text>
                 <line x1="30" y1="50" x2="160" y2="50" style="stroke: #e2e8f0; stroke-width: 1.5;" />
-                
+
                 <!-- Inner PPMU Modules -->
                 <rect x="45" y="65" width="100" height="25" class="dia-box active" />
                 <text x="95" y="81" class="dia-text" style="fill: #2b5c8f; font-size: 10px;">PPMU แชนเนล 0</text>
-                
+
                 <rect x="45" y="100" width="100" height="25" class="dia-box active" />
                 <text x="95" y="116" class="dia-text" style="fill: #2b5c8f; font-size: 10px;">PPMU แชนเนล 1</text>
-                
+
                 <rect x="45" y="135" width="100" height="25" class="dia-box active" />
                 <text x="95" y="151" class="dia-text" style="fill: #2b5c8f; font-size: 10px;">PPMU แชนเนล 2</text>
-                
+
                 <!-- Outputs to Chip -->
-                <path d="M145 77h100" class="dia-arrow" marker-end="url(#arrow)" />
-                <path d="M145 112h100" class="dia-arrow" marker-end="url(#arrow)" />
-                <path d="M145 147h100" class="dia-arrow" marker-end="url(#arrow)" />
-                
+                <path d="M148 77.5h87" class="dia-arrow" marker-end="url(#arrow)" />
+                <path d="M148 112.5h87" class="dia-arrow" marker-end="url(#arrow)" />
+                <path d="M148 147.5h87" class="dia-arrow" marker-end="url(#arrow)" />
+
                 <!-- Target DUT Chip Pins -->
                 <rect x="245" y="60" width="120" height="110" class="dia-box" />
                 <text x="305" y="80" class="dia-text">ขาพินชิป (DUT)</text>
@@ -472,7 +476,7 @@ ppmuPins.ForceVoltage(ppmuForceSettings);`,
         narrative: `
             <h4>การวัดความละเอียดและความแม่นยำพิเศษผ่าน DMM</h4>
             <p>การใช้การ์ด **DMM (Digital Multimeter)** หรือมัลติมิเตอร์วัดละเอียดของ NI (เช่น <code>PXIe-4081</code>) มักนำมาประยุกต์ใช้ในกรณีทดสอบที่ต้องการระดับความเที่ยงตรงสูงเป็นพิเศษ ซึ่งบอร์ด SMU หรือ PPMU ทั่วไปให้ความแม่นยำไม่เพียงพอ</p>
-            
+
             <h4>โฟลว์ลำดับขั้นตอนของคำสั่งควบคุมการ์ด DMM:</h4>
             <ol>
                 <li><strong>Configure Measurement:</strong> ตั้งค่าประเภทการตรวจวัด เช่น วัดกระแสตรง แรงดันตรง ความต้านทาน หรือวัดไดโอด พร้อมระบุระดับความละเอียด (เช่น 7.5 digit)</li>
@@ -482,7 +486,7 @@ ppmuPins.ForceVoltage(ppmuForceSettings);`,
             </ol>
 
             <div class="tip-block">
-                <div class="tip-block-title">💡 ความต่างของ DMM ในตู้ ATE</div>
+                <div class="tip-block-title"> ความต่างของ DMM ในตู้ ATE</div>
                 <p>แม้ DMM จะมีความแม่นยำสูงมาก แต่มีข้อจำกัดทางกายภาพคือ <strong>มีจำนวนแชนเนลในบอร์ดน้อยมาก (มักใช้แชร์ร่วมกันผ่านสวิตช์รีเลย์)</strong> ทำให้วัดพร้อมกันขนานหลายพินไม่ได้ จึงต้องรันการวัดแบบไล่สายสัญญาณทีละพิน (Serial) ซึ่งขัดแย้งกับหลักการทำ Multisite ความเร็วสูง</p>
             </div>
         `,
@@ -508,20 +512,20 @@ tsmContext.PublishResults(new string[] { "SystemDmmPin" }, "DmmVoltage", dmmMeas
                 <rect x="30" y="30" width="100" height="50" class="dia-box active" />
                 <text x="80" y="55" class="dia-text" style="fill: #2b5c8f;">Precision DMM</text>
                 <text x="80" y="68" class="dia-text-sub">(PXIe-4081)</text>
-                
-                <path d="M130 55h50" class="dia-arrow" marker-end="url(#arrow)" />
-                
+
+                <path d="M133 55h37" class="dia-arrow" marker-end="url(#arrow)" />
+
                 <!-- Relay Switch Matrix block -->
                 <rect x="180" y="25" width="80" height="160" class="dia-box" style="fill: #fffbeb; stroke: #f59e0b;" />
                 <text x="220" y="50" class="dia-text" style="fill: #d97706;">Relay Switch</text>
                 <text x="220" y="62" class="dia-text-sub">(Matrix Routing)</text>
-                
+
                 <!-- Relay switches lines -->
                 <line x1="190" y1="90" x2="250" y2="120" style="stroke: #f59e0b; stroke-width: 2;" />
                 <line x1="190" y1="130" x2="250" y2="130" style="stroke: #f59e0b; stroke-width: 1.5; stroke-dasharray: 2;" />
-                
-                <path d="M260 125h50" class="dia-arrow" marker-end="url(#arrow)" />
-                
+
+                <path d="M263 125h37" class="dia-arrow" marker-end="url(#arrow)" />
+
                 <!-- Target Pins -->
                 <rect x="310" y="100" width="70" height="50" class="dia-box" />
                 <text x="345" y="125" class="dia-text">DUT Pins</text>
@@ -535,7 +539,7 @@ tsmContext.PublishResults(new string[] { "SystemDmmPin" }, "DmmVoltage", dmmMeas
         narrative: `
             <h4>การบันทึกคลื่นความถี่และประมวลผลข้อมูลผ่านการ์ด DAQ</h4>
             <p>การใช้งานการ์ด **DAQ (Data Acquisition)** เช่น รุ่น <code>PXIe-6368</code> หรือ <code>PXIe-4467</code> มักนำมาประยุกต์ใช้ในการตรวจวัดสัญญาณกระแสสลับ (AC) ความถี่ต่ำถึงปานกลาง การบันทึกรูปคลื่นสัญญาณไฟฟ้าเชิงเวลา (Waveform Capture) หรือใช้ปล่อยคลื่นเสียงเพื่อทดสอบชิปแอมพลิฟายเออร์</p>
-            
+
             <h4>โฟลว์ขั้นตอนของบอร์ดควบคุม DAQ (ใช้วิธี Task-Based):</h4>
             <ol>
                 <li><strong>Create Task:</strong> สร้างคำสั่งระบุประเภทแชนเนลการวัดทางอนาล็อก เช่น วัดระดับแรงดันอนาล็อกขาเข้า (Analog Input - AI Task)</li>
@@ -546,7 +550,7 @@ tsmContext.PublishResults(new string[] { "SystemDmmPin" }, "DmmVoltage", dmmMeas
             </ol>
 
             <div class="tip-block">
-                <div class="tip-block-title">💡 การเขียน C# ร่วมกับ DAQmx API</div>
+                <div class="tip-block-title"> การเขียน C# ร่วมกับ DAQmx API</div>
                 <p>ในการเขียนโปรแกรมคุม DAQ ในเทมเพลต ADI จะใช้งานผ่านไดรเวอร์ <code>NIDAQmxTask</code> ซึ่งระบุขอบเขตการทำงานร่วมกับ Pin Map ในระดับ Abstraction คล้ายคลึงกับคำสั่งวัดแรงดันกระแสตรงของบอร์ด SMU</p>
             </div>
         `,
@@ -569,19 +573,19 @@ daqTask.Stop();`,
                     </marker>
                 </defs>
                 <!-- Analog Input wave source -->
-                <path d="M10 100 Q 30 50, 50 100 T 90 100 T 130 100" style="fill:none; stroke: #3b82f6; stroke-width: 2;" />
-                <text x="65" y="130" class="dia-text-sub">Analog Waveform (AC)</text>
-                
-                <path d="M100 100h30" class="dia-arrow" marker-end="url(#arrow)" />
-                
+                <path d="M-15 100 Q 5 70, 25 100 T 65 100" style="fill:none; stroke: #3b82f6; stroke-width: 2;" />
+                <text x="25" y="155" class="dia-text-sub" style="text-anchor: middle;">Analog Waveform (AC)</text>
+
+                <path d="M75 100h45" class="dia-arrow" marker-end="url(#arrow)" />
+
                 <!-- DAQ Card (PXIe-6368) -->
                 <rect x="130" y="55" width="110" height="90" class="dia-box active" />
                 <text x="185" y="80" class="dia-text" style="fill: #2b5c8f;">DAQ Card</text>
                 <text x="185" y="95" class="dia-text-sub">(Analog to Digital)</text>
                 <text x="185" y="115" class="dia-text" style="font-size: 8px;">สุ่มบันทึก: 2 MS/s</text>
-                
-                <path d="M240 100h40" class="dia-arrow" marker-end="url(#arrow)" />
-                
+
+                <path d="M244 100h26" class="dia-arrow" marker-end="url(#arrow)" />
+
                 <!-- Digital calculation block -->
                 <rect x="280" y="55" width="100" height="90" class="dia-box" style="fill: #f1f5f9; stroke: #64748b;" />
                 <text x="330" y="80" class="dia-text">C# DSP Code</text>
@@ -597,7 +601,7 @@ daqTask.Stop();`,
         narrative: `
             <h4>ภาพรวมลำดับการทำงานตั้งแต่เริ่มเปิดตู้จนจบการทดสอบชิป</h4>
             <p>นี่คือลำดับเหตุการณ์การทำงานจริง (Execution Workflow) ที่ระบบ STS และ C# Code Module ดำเนินการประสานงานส่งต่อข้อมูลกันในสายการผลิตจริงแบบเป็นลำดับขั้นตอน:</p>
-            
+
             <h4>ไทม์ไลน์การทดสอบตั้งแต่เริ่มยันจบ:</h4>
             <ol>
                 <li><strong>ProcessSetup (เริ่มรันล็อต):</strong> TestStand โหลดไฟล์ลำดับการทดสอบ <code>.seq</code> และจับคู่แผนผังพิน <code>.pinmap</code> จากนั้นระบบ TSM ทำการเปิดจองเซสชันบอร์ดการ์ดต่างๆ</li>
@@ -621,12 +625,12 @@ public static void TS_TestSequence(ISemiconductorModuleContext tsmContext)
 {
     // 1. Setup: สร้างการจองเซสชัน
     var sessionManager = new TSMSessionManager(tsmContext);
-    
+
     // 2. Main: รันขั้นตอนจ่ายกระแสวัดค่า
     var smuPins = sessionManager.DCPower("SupplyPins");
     smuPins.ForceVoltage(3.3, 0.05);
     smuPins.MeasureAndPublishCurrent("LeakageCurrent");
-    
+
     // 3. Cleanup: ปิดไฟเลี้ยงก่อนจบรันชิ้นงานชิ้นนี้
     smuPins.ForceVoltage(0, 0.01);
 }`,
@@ -640,34 +644,34 @@ public static void TS_TestSequence(ISemiconductorModuleContext tsmContext)
                 <!-- Timeline sequence -->
                 <g transform="translate(10, 10)">
                     <rect x="0" y="10" width="70" height="40" class="dia-box" />
-                    <text x="35" y="30" class="dia-text" style="font-size: 8px;">1. ProcessSetup</text>
-                    <text x="35" y="42" class="dia-text-sub" style="font-size: 7px;">โหลดตั้งค่าบอร์ด</text>
-                    
-                    <path d="M70 30h15" class="dia-arrow" marker-end="url(#arrow)" />
-                    
+                    <text x="35" y="28" class="dia-text" style="font-size: 8px;">1. ProcessSetup</text>
+                    <text x="35" y="40" class="dia-text-sub" style="font-size: 7px;">โหลดตั้งค่าบอร์ด</text>
+
+                    <path d="M73 30h6" class="dia-arrow" marker-end="url(#arrow)" />
+
                     <rect x="85" y="10" width="70" height="40" class="dia-box" />
-                    <text x="120" y="30" class="dia-text" style="font-size: 8px;">2. Setup</text>
-                    <text x="120" y="42" class="dia-text-sub" style="font-size: 7px;">ต่อรีเลย์/จ่ายไฟ</text>
-                    
-                    <path d="M155 30h15" class="dia-arrow" marker-end="url(#arrow)" />
-                    
+                    <text x="120" y="28" class="dia-text" style="font-size: 8px;">2. Setup</text>
+                    <text x="120" y="40" class="dia-text-sub" style="font-size: 7px;">ต่อรีเลย์/จ่ายไฟ</text>
+
+                    <path d="M158 30h6" class="dia-arrow" marker-end="url(#arrow)" />
+
                     <rect x="170" y="10" width="80" height="40" class="dia-box active" />
-                    <text x="210" y="30" class="dia-text" style="font-size: 8px; fill: #2b5c8f;">3. Main (C# Code)</text>
-                    <text x="210" y="42" class="dia-text-sub" style="font-size: 7px;">เทส/วัดค่า/บันทึกผล</text>
-                    
-                    <path d="M250 30h15" class="dia-arrow" marker-end="url(#arrow)" />
-                    
+                    <text x="210" y="28" class="dia-text" style="font-size: 8px; fill: #2b5c8f;">3. Main (C# Code)</text>
+                    <text x="210" y="40" class="dia-text-sub" style="font-size: 7px;">เทส/วัดค่า/บันทึกผล</text>
+
+                    <path d="M253 30h6" class="dia-arrow" marker-end="url(#arrow)" />
+
                     <rect x="265" y="10" width="70" height="40" class="dia-box" />
-                    <text x="300" y="30" class="dia-text" style="font-size: 8px;">4. Cleanup</text>
-                    <text x="300" y="42" class="dia-text-sub" style="font-size: 7px;">เซ็ตปลอดภัย 0V</text>
-                    
-                    <path d="M335 30h15" class="dia-arrow" marker-end="url(#arrow)" />
-                    
-                    <rect x="350" y="10" width="30" height="40" class="dia-box" style="fill: #e2e8f0; stroke: #64748b;" />
-                    <text x="365" y="30" class="dia-text" style="font-size: 7px;">5. Post</text>
-                    <text x="365" y="42" class="dia-text-sub" style="font-size: 6px;">รายงาน STDF</text>
+                    <text x="300" y="28" class="dia-text" style="font-size: 8px;">4. Cleanup</text>
+                    <text x="300" y="40" class="dia-text-sub" style="font-size: 7px;">เซ็ตปลอดภัย 0V</text>
+
+                    <path d="M338 30h6" class="dia-arrow" marker-end="url(#arrow)" />
+
+                    <rect x="350" y="10" width="60" height="40" class="dia-box" style="fill: #e2e8f0; stroke: #64748b;" />
+                    <text x="380" y="28" class="dia-text" style="font-size: 8px;">5. Post</text>
+                    <text x="380" y="40" class="dia-text-sub" style="font-size: 7px;">รายงาน STDF</text>
                 </g>
-                
+
                 <rect x="50" y="80" width="300" height="110" class="dia-box" style="fill: #f0fdf4; stroke: #10b981;" />
                 <text x="200" y="102" class="dia-text" style="fill: #065f46; font-size: 11px;">ระยะที่สำคัญสูงสุดของวิศวกร: ขั้นตอน Main</text>
                 <text x="200" y="125" class="dia-text-sub" style="fill: #047857; text-anchor: middle;">1. Force สัญญาณไฟเข้าชิปเป้าหมาย</text>
@@ -682,7 +686,7 @@ public static void TS_TestSequence(ISemiconductorModuleContext tsmContext)
         narrative: `
             <h4>การเร่งความเร็วในการรันงานด้วยคำสั่ง InvokeInParallel</h4>
             <p>เพื่อช่วยประหยัดเวลารันเทสชิป (Test Time) ให้เร็วที่สุด เฟรมเวิร์กของ ADI และ TSM จะมีฟังก์ชันช่วยเหลือสำหรับแยกสั่งงานบอร์ดขนานไปพร้อมกันบนซีพียูแยกเธรด นั่นคือคำสั่ง **<code>InvokeInParallel</code>**</p>
-            
+
             <h4>การประยุกต์ใช้งานในโค้ด C# ของคุณ:</h4>
             <ul>
                 <li><strong>สถานการณ์จริง:</strong> บอร์ดเครื่องวัดฝั่ง SMU และการ์ดดิจิทัล PPMU ไม่มีฮาร์ดแวร์ขั้วเชื่อมโยงถึงกัน ดังนั้นเวลาส่งคำสั่ง สองฝั่งนี้ควรจะรันไปพร้อมๆ กันเพื่อไม่ให้เสียเวลาตั้งค่าแบบต่อคิวทีละบอร์ด</li>
@@ -691,13 +695,13 @@ public static void TS_TestSequence(ISemiconductorModuleContext tsmContext)
         `,
         code: `// ตัวอย่างโค้ดจริงในโปรเจกต์ที่สั่งงานการตั้งค่าคู่ขนานกันข้ามบอร์ด (จาก Continuity.cs)
 InvokeInParallel(
-    // 🟢 เธรดที่ 1: ตั้งค่าจ่ายไฟ 0V ให้พิน SMU ทั้งหมด
+    // เธรดที่ 1: ตั้งค่าจ่ายไฟ 0V ให้พิน SMU ทั้งหมด
     () => {
         if (smuSupplyPins.Length > 0) {
             sessionManager.DCPower(smuSupplyPins).ForceVoltage(0, setting.CurrentLimit);
         }
     },
-    // 🔵 เธรดที่ 2: ตั้งค่าจ่ายไฟ 0V ให้พินดิจิทัลทั้งหมด
+    // เธรดที่ 2: ตั้งค่าจ่ายไฟ 0V ให้พินดิจิทัลทั้งหมด
     () => {
         if (pmuSupplyPins.Length > 0) {
             sessionManager.Digital(pmuSupplyPins).ForceVoltage(0, setting.CurrentLimit);
@@ -714,30 +718,31 @@ InvokeInParallel(
                 <!-- InvokeInParallel start -->
                 <rect x="140" y="10" width="120" height="35" class="dia-box active" />
                 <text x="200" y="32" class="dia-text" style="fill: #2b5c8f;">InvokeInParallel</text>
-                
+
                 <!-- Split arrows -->
-                <path d="M140 27h-60v35" class="dia-arrow" marker-end="url(#arrow)" />
-                <path d="M260 27h60v35" class="dia-arrow" marker-end="url(#arrow)" />
-                
+                <path d="M140 27.5h-55v27.5" class="dia-arrow" marker-end="url(#arrow)" />
+                <path d="M260 27.5h55v27.5" class="dia-arrow" marker-end="url(#arrow)" />
+
                 <!-- Parallel Threads -->
                 <rect x="20" y="65" width="130" height="60" class="dia-box" style="fill: #f0fdf4; stroke: #10b981;" />
                 <text x="85" y="85" class="dia-text" style="fill: #065f46;">เธรดที่ 1 (Thread 1)</text>
                 <text x="85" y="100" class="dia-text-sub" style="fill: #047857;">สั่งการบอร์ด DCPower (SMU)</text>
                 <text x="85" y="112" class="dia-text-sub" style="fill: #047857;">ให้สับรีเลย์จ่ายไฟ</text>
-                
+
                 <rect x="250" y="65" width="130" height="60" class="dia-box" style="fill: #eff6ff; stroke: #3b82f6;" />
                 <text x="315" y="85" class="dia-text" style="fill: #1e3a8a;">เธรดที่ 2 (Thread 2)</text>
                 <text x="315" y="100" class="dia-text-sub" style="fill: #1d4ed8;">สั่งการบอร์ดดิจิทัล (PPMU)</text>
                 <text x="315" y="112" class="dia-text-sub" style="fill: #1d4ed8;">ให้ตั้งค่าพารามิเตอร์วัดค่า</text>
-                
+
                 <!-- Join arrows -->
-                <path d="M85 125v35h75" class="dia-arrow" />
-                <path d="M315 125v35h-75" class="dia-arrow" />
-                
+                <path d="M85 129v13h115" class="dia-arrow" />
+                <path d="M315 129v13h-115" class="dia-arrow" />
+                <path d="M200 142v8" class="dia-arrow" marker-end="url(#arrow)" />
+
                 <!-- Synchronization point -->
-                <rect x="140" y="160" width="120" height="30" class="dia-box" style="fill: #f1f5f9; stroke: #64748b;" />
-                <text x="200" y="178" class="dia-text" style="fill: #334155;">ประสานเวลารอกัน (Sync)</text>
-                <text x="200" y="188" class="dia-text-sub">รอจนงานของทั้ง 2 เธรดเสร็จสิ้น</text>
+                <rect x="110" y="160" width="180" height="40" class="dia-box" style="fill: #f1f5f9; stroke: #64748b;" />
+                <text x="200" y="176" class="dia-text" style="fill: #334155;">ประสานเวลารอกัน (Sync)</text>
+                <text x="200" y="189" class="dia-text-sub">รอจนงานของทั้ง 2 เธรดเสร็จสิ้น</text>
             </svg>
         `
     },
@@ -747,7 +752,7 @@ InvokeInParallel(
         narrative: `
             <h4>การวัดค่าและการส่งรายงานผลลัพธ์ย้อนกลับเข้า TestStand</h4>
             <p>เมื่อเครื่องวัดการ์ดฮาร์ดแวร์ทำงานตรวจจับระดับแรงดันกระแสไฟตรงของชิปเรียบร้อยแล้ว ขั้นตอนการนำค่าวัดที่ได้ส่งรายงานผลไปให้ TestStand ตัดสินและออกรายงาน Datalog จะใช้คำสั่งกลุ่ม **<code>Measure and Publish</code>**</p>
-            
+
             <h4>ขั้นตอนการทำงานเบื้องหลังของคำสั่ง:</h4>
             <ul>
                 <li><strong>เรียกใช้คำสั่งระดับสูง:</strong> โค้ด C# เรียกเมธอด เช่น <code>smuPins.MeasureAndPublishVoltage("CS_Voltage")</code> หรือ <code>MeasureAndPublishCurrent("Leakage")</code></li>
@@ -759,9 +764,9 @@ InvokeInParallel(
         code: `// การวัดแรงดันไฟและรายงานผลลัพธ์ในบรรทัดเดียว (จาก Continuity.cs)
 for (int i = 0; i < dcPowerTestPins.Count; i++)
 {
-    DCPowerSessionsBundle pinSession = sessionManager.DCPower(dcPowerTestPins[i]);                
+    DCPowerSessionsBundle pinSession = sessionManager.DCPower(dcPowerTestPins[i]);
     pinSession.ForceCurrent(dcPowerTestLevels[i], smuPinVoltageLimit, waitForSourceCompletion: true);
-    
+
     // ทำการวัดค่าแรงดันและส่งกลับรายงานไปที่ TestStand ทันทีภายใต้ชื่อ ID "dcPowerPublishIDs"
     pinSession.MeasureAndPublishVoltage(dcPowerPublishIDs[i]);
 }`,
@@ -776,25 +781,356 @@ for (int i = 0; i < dcPowerTestPins.Count; i++)
                 <rect x="20" y="40" width="110" height="50" class="dia-box active" />
                 <text x="75" y="65" class="dia-text" style="fill: #2b5c8f; font-size: 9px;">MeasureAndPublish</text>
                 <text x="75" y="78" class="dia-text-sub" style="font-size: 8px;">(C# Code Module)</text>
-                
-                <path d="M130 65h50" class="dia-arrow" marker-end="url(#arrow)" />
-                
+
+                <path d="M133 65h37" class="dia-arrow" marker-end="url(#arrow)" />
+
                 <!-- TestStand Limits Check -->
                 <rect x="180" y="30" width="110" height="70" class="dia-box" style="fill: #fffbeb; stroke: #f59e0b;" />
                 <text x="235" y="52" class="dia-text" style="fill: #d97706; font-size: 10px;">TestStand Limits</text>
                 <text x="235" y="68" class="dia-text-sub" style="font-size: 8px; fill: #b45309;">ขอบเขต: LL=2.8V, UL=3.5V</text>
                 <text x="235" y="82" class="dia-text" style="font-size: 8px; fill: #b45309;">เทียบค่าวัดจริง 3.2V</text>
-                
-                <path d="M290 65h50" class="dia-arrow" marker-end="url(#arrow)" />
-                
+
+                <path d="M293 65h37" class="dia-arrow" marker-end="url(#arrow)" />
+
                 <!-- Final status -->
                 <rect x="340" y="50" width="45" height="30" class="dia-box" style="fill: #d1fae5; stroke: #10b981;" />
                 <text x="362.5" y="70" class="dia-text" style="fill: #065f46; font-size: 10px; text-anchor: middle;">PASS</text>
-                
+
                 <!-- Bottom datalog status -->
                 <rect x="80" y="140" width="240" height="40" class="dia-box" style="fill: #f1f5f9; stroke: #64748b;" />
-                <text x="200" y="158" class="dia-text" style="fill: #334155; font-size: 10px;">เก็บสถิติลง Datalog (STDF File)</text>
-                <text x="200" y="172" class="dia-text-sub">เพื่อสรุปผลผลิตชิ้นงานเมื่อจบการทดสอบทั้งล็อต</text>
+                <text x="200" y="156" class="dia-text" style="fill: #334155; font-size: 10px;">เก็บสถิติลง Datalog (STDF File)</text>
+                <text x="200" y="170" class="dia-text-sub">เพื่อสรุปผลผลิตชิ้นงานเมื่อจบการทดสอบทั้งล็อต</text>
+            </svg>
+        `
+    },
+    test_assignment: {
+        module: "Module 4: Hands-on Workshop",
+        title: "13. Workshop - ลองเขียน test.cs",
+        narrative: `
+            <h4>โจทย์ฝึกปฏิบัติ: เขียนโค้ด Continuity Test ด้วย STL</h4>
+            <p>ในบทฝึกปฏิบัตินี้ คุณจะได้รับมอบหมายให้เขียนโค้ดทดสอบความต่อเนื่องของสัญญาณไฟฟ้า (Continuity Test) สำหรับขาพิน <code>CS</code> และ <code>SCLK</code> ของอุปกรณ์ชิปเป้าหมาย (DUT) โดยนำหลักการจองเซสชันและการสั่งการระดับสูงของ Semiconductor Test Library (STL) มาใช้งานแบบครบวงจร</p>
+
+            <h4>ข้อกำหนดและลำดับขั้นตอนในโค้ด C# ที่คุณต้องเขียน:</h4>
+            <ul>
+                <li><strong>1. จองและสร้างคอนเท็กซ์:</strong> เริ่มต้นด้วยการสร้าง <code>TSMSessionManager</code> จากอาร์กิวเมนต์ <code>tsmContext</code> ที่ถูกส่งเข้ามาจากระบบ TestStand</li>
+                <li><strong>2. ค้นหาบอร์ด DCPower (SMU):</strong> เรียกใช้เมธอดดึงเซสชันควบคุมบอร์ด DCPower สำหรับพินเป้าหมายทั้งหมดที่อยู่ในอาร์เรย์ <code>pins</code></li>
+                <li><strong>3. จ่ายพลังงานกระแสติดลบ:</strong> เรียกใช้เมธอดควบคุมในรูปของ Session Bundle สั่งจ่ายกระแสไฟฟ้าระดับต่ำในทิศทางติดลบ (เช่น <code>currentLevel = -0.0001</code> แอมป์ หรือ -100µA) และกำหนดระดับการจำกัดแรงดันความปลอดภัยที่ <code>voltageLimit</code> (เช่น -1.5V) เพื่อรันไดโอดป้องกัน ESD ในสถานะ Forward Bias</li>
+                <li><strong>4. วัดผลและจัดส่งรายงานทันที:</strong> ทำการวัดแรงดันตกคร่อมและจัดส่งค่าที่วัดได้กลับไปยัง TestStand ทันทีภายใต้รหัส <code>publishIds</code> ในคำสั่งเดียว</li>
+                <li><strong>5. นำช่องวัดฮาร์ดแวร์กลับสู่สถานะปลอดภัย:</strong> หลังจากจัดส่งผลทดสอบแล้ว ให้สั่งจ่ายแรงดันกลับไปที่ 0V เพื่อความปลอดภัยและถนอมชิป</li>
+            </ul>
+
+            <div class="tip-block">
+                <div class="tip-block-title">คำแนะนำในการทำแบบฝึกหัด</div>
+                <p>ศึกษาโครงสร้างเมธอดในโค้ดตัวอย่างด้านขวา และตอบคำถามในแบบทดสอบด้านล่างเพื่อยืนยันว่าเข้าใจคำสั่งสำคัญของการรายงานผลแบบเรียลไทม์ ก่อนจะย้ายไปยังบทเฉลยถัดไป</p>
+            </div>
+        `,
+        code: `using System;
+using System.Collections.Generic;
+using NationalInstruments.SemiconductorTestLibrary.InstrumentAbstraction;
+using NationalInstruments.SemiconductorTestLibrary.InstrumentAbstraction.DCPower;
+using NationalInstruments.SemiconductorTestLibrary.Common;
+using static NationalInstruments.SemiconductorTestLibrary.Common.Utilities;
+
+namespace ADIProjectTemplate.TestModules
+{
+    public static class TS_ContinuityTest
+    {
+        public static void RunContinuityTest(
+            ISemiconductorModuleContext tsmContext,
+            string[] pins,
+            string[] publishIds,
+            double currentLevel,
+            double voltageLimit)
+        {
+            // TODO: 1. สร้าง TSMSessionManager จาก tsmContext เพื่อจัดการเชื่อมเซสชัน
+
+            // TODO: 2. ดึง DCPower sessions bundle สำหรับพินทั้งหมดที่ระบุในอาเรย์ pins
+
+            // TODO: 3. บังคับกระแสไฟ (Force Current) ด้วยค่า currentLevel และตั้งค่าขอบเขตแรงดันที่ voltageLimit
+
+            // TODO: 4. วัดแรงดันที่วัดได้และส่งรายงานผลการทดสอบกลับไปยัง TestStand โดยตรงผ่าน publishIds
+
+            // TODO: 5. เคลียร์ระดับแรงดันแหล่งจ่ายไฟกลับมาที่ 0V เพื่อเข้าสู่สภาวะปลอดภัย (Safe State)
+        }
+    }
+}`,
+        diagram: `
+            <svg viewBox="-30 -20 460 260" width="100%" height="100%" class="diagram-svg">
+                <defs>
+                    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+                    </marker>
+                </defs>
+                <!-- Sequence of Actions -->
+                <rect x="30" y="10" width="340" height="32" class="dia-box active" />
+                <text x="200" y="30" class="dia-text" style="fill: #2b5c8f; font-weight: 600;">1. สร้าง TSMSessionManager</text>
+
+                <path d="M200 46v9" class="dia-arrow" marker-end="url(#arrow)" />
+
+                <rect x="30" y="65" width="340" height="32" class="dia-box" />
+                <text x="200" y="85" class="dia-text">2. ค้นหาเซสชัน SMU ผ่านพิน CS และ SCLK</text>
+
+                <path d="M200 101v9" class="dia-arrow" marker-end="url(#arrow)" />
+
+                <rect x="30" y="120" width="340" height="44" class="dia-box" />
+                <text x="200" y="138" class="dia-text">
+                    <tspan x="200" dy="0">3. สั่งจ่ายกระแสไฟติดลบและวัดค่าด้วย</tspan>
+                    <tspan x="200" dy="13" style="fill: #2b5c8f; font-weight: 700;">MeasureAndPublishVoltage</tspan>
+                </text>
+
+                <path d="M200 168v12" class="dia-arrow" marker-end="url(#arrow)" />
+
+                <rect x="30" y="190" width="340" height="32" class="dia-box" style="fill: #f1f5f9; stroke: #64748b;" />
+                <text x="200" y="210" class="dia-text" style="fill: #334155;">4. คืนค่าแรงดันที่ขาไฟเลี้ยงสู่สถานะ 0V</text>
+            </svg>
+        `
+    },
+    test_solution: {
+        module: "Module 4: Hands-on Workshop",
+        title: "14. เฉลยและอธิบายโค้ดละเอียด",
+        narrative: `
+            <h4>อธิบายเฉลยและเบื้องหลังทางวิศวกรรมไฟฟ้าของ Continuity Test</h4>
+            <p>โค้ดในตัวอย่างด้านขวาแสดงการใช้เมธอด in STL เพื่อรันการทดสอบความต่อเนื่องของหน้าสัมผัสของชิป (Continuity) ได้อย่างมีประสิทธิภาพโดยใช้โค้ดเพียงไม่กี่บรรทัด</p>
+
+            <h4>รายละเอียดการทำงานแต่ละสเต็ป:</h4>
+            <ul>
+                <li><strong>สเต็ปการเปิดเซสชัน (บรรทัดที่ 16-19):</strong> ระบบจะแปลงรายชื่อพิน เช่น <code>"CS"</code> และ <code>"SCLK"</code> เพื่อนำไปจับคู่กับทรัพยากรบอร์ดฮาร์ดแวร์จริงในไฟล์ <code>.pinmap</code> โดยอัตโนมัติ</li>
+                <li><strong>ทำไมต้องจ่ายกระแสติดลบ? (บรรทัดที่ 23):</strong> ตามหลักวิศวกรรมเซมิคอนดักเตอร์ ชิปทุกตัวจะมีไดโอดป้องกันไฟฟ้าสถิต (ESD Protection Diode) เชื่อมต่อระหว่างพินสัญญาณกับกราวด์ การป้อนกระแสทิศทางติดลบ (เช่น -100µA) จะทำให้กระแสไหลผ่านไดโอดแบบไบแอสตรง (Forward-biased) ซึ่งจะตกคร่อมแรงดันประมาณ <strong>-0.5V ถึง -0.8V</strong></li>
+                <li><strong>การอ่านค่าและส่งผลในขั้นตอนเดียว (บรรทัดที่ 26):</strong> เมธอด <code>MeasureAndPublishVoltage()</code> จะอ่านค่าแรงดันย้อนกลับจากบอร์ด แล้วยิงข้อมูลตรงไปยังตัวเก็บผลของ TestStand เพื่อเปรียบเทียบ Limits</li>
+                <li><strong>การประเมินผลลัพธ์ (PASS/FAIL):</strong>
+                    <ul>
+                        <li><strong>ปกติ:</strong> วัดแรงดันตกคร่อมไดโอดได้ประมาณ -0.6V &rarr; <strong>PASS</strong></li>
+                        <li><strong>ขาลอย/หน้าสัมผัสไม่แตะ (Open):</strong> แรงดันจะถูกต้านจนชนขีดจำกัดลบ (เช่น -1.5V) &rarr; <strong>FAIL (Open)</strong></li>
+                        <li><strong>ขาช็อตลงดิน (Short):</strong> วัดค่าแรงดันได้ใกล้เคียง 0V &rarr; <strong>FAIL (Short)</strong></li>
+                    </ul>
+                </li>
+                <li><strong>สภาวะปลอดภัย (บรรทัดที่ 29):</strong> สั่งปรับแรงดันไฟฟ้ากลับมาที่ 0V เพื่อเคลียร์กระแสที่ค้างอยู่ออก</li>
+            </ul>
+
+            <div class="tip-block">
+                <div class="tip-block-title">ข้อดีของการใช้ STL ในงานทดสอบระดับอุตสาหกรรม</div>
+                <p>การใช้ STL สั่งการแบบห่อหุ้มในลักษณะนี้ ทำให้คุณไม่จำเป็นต้องเขียนลูปวนตรวจสอบทีละชิปหรือไซต์งาน โค้ดสามารถนำคีย์เวิร์ดของกลุ่มพินไปเปิดขนานการวัดในระดับฮาร์ดแวร์พร้อมกันทั้งหมด ช่วยประหยัดเวลาการทดสอบได้อย่างมหาศาล</p>
+            </div>
+        `,
+        code: `using System;
+using System.Collections.Generic;
+using NationalInstruments.SemiconductorTestLibrary.InstrumentAbstraction;
+using NationalInstruments.SemiconductorTestLibrary.InstrumentAbstraction.DCPower;
+using NationalInstruments.SemiconductorTestLibrary.Common;
+using static NationalInstruments.SemiconductorTestLibrary.Common.Utilities;
+
+namespace ADIProjectTemplate.TestModules
+{
+    public static class TS_ContinuityTest
+    {
+        public static void RunContinuityTest(
+            ISemiconductorModuleContext tsmContext,
+            string[] pins,
+            string[] publishIds,
+            double currentLevel,
+            double voltageLimit)
+        {
+            // 1. เริ่มต้นและผูกความสัมพันธ์เซสชัน
+            var sessionManager = new TSMSessionManager(tsmContext);
+
+            // 2. ดึงมัดรวมกลุ่มของเซสชัน DCPower (SMU)
+            DCPowerSessionsBundle dcSessions = sessionManager.DCPower(pins);
+
+            // 3. จ่ายกระแสไฟฟ้าทิศทางลบเพื่อเปิดการทำงาน ESD Diode แบบไบแอสตรง
+            dcSessions.ForceCurrent(currentLevel, voltageLimit, waitForSourceCompletion: true);
+
+            // 4. วัดระดับแรงดันและนำส่งรายงานผลการตรวจสอบไปยัง TestStand
+            dcSessions.MeasureAndPublishVoltage(publishIds);
+
+            // 5. ปรับระดับแรงดันกลับมาเป็น 0V ทันทีเพื่อความปลอดภัยก่อนข้ามขั้นตอน
+            dcSessions.ForceVoltage(0.0, 0.001);
+        }
+    }
+}`,
+        diagram: `
+            <svg viewBox="-30 -20 560 260" width="100%" height="100%" class="diagram-svg">
+                <defs>
+                    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+                    </marker>
+                </defs>
+                <!-- Hardware to Code to TestStand Flow -->
+                <rect x="0" y="40" width="130" height="50" class="dia-box" style="fill: #e2e8f0; stroke: #64748b;" />
+                <text x="65" y="65" class="dia-text" style="fill: #334155; font-size: 9px;">ฮาร์ดแวร์ SMU (DCPower)</text>
+                <text x="65" y="78" class="dia-text-sub" style="font-size: 8px; fill: #64748b;">(จ่ายกระแส / วัดแรงดัน)</text>
+
+                <path d="M134 65h46" class="dia-arrow" marker-end="url(#arrow)" />
+
+                <rect x="190" y="40" width="130" height="50" class="dia-box active" />
+                <text x="255" y="65" class="dia-text" style="fill: #2b5c8f; font-size: 9px;">C# Code (STL Libraries)</text>
+                <text x="255" y="78" class="dia-text-sub" style="font-size: 8px; fill: #2b5c8f;">(MeasureAndPublish)</text>
+
+                <path d="M324 65h46" class="dia-arrow" marker-end="url(#arrow)" />
+
+                <rect x="380" y="40" width="130" height="50" class="dia-box" style="fill: #fffbeb; stroke: #f59e0b;" />
+                <text x="445" y="65" class="dia-text" style="fill: #d97706; font-size: 9px;">TestStand Engine</text>
+                <text x="445" y="78" class="dia-text-sub" style="font-size: 8px; fill: #b45309;">(เปรียบเทียบกับ Limits)</text>
+
+                <path d="M445 94v46" class="dia-arrow" marker-end="url(#arrow)" />
+
+                <rect x="330" y="150" width="180" height="50" class="dia-box" style="fill: #f1f5f9; stroke: #64748b;" />
+                <text x="420" y="175" class="dia-text" style="fill: #334155; font-size: 9px;">จัดทำรายงานผล (PASS/FAIL)</text>
+                <text x="420" y="188" class="dia-text-sub" style="font-size: 8px; fill: #64748b;">(รายงานผ่าน Datalog & STDF)</text>
+
+                <path d="M255 94v20H165v26" class="dia-arrow" marker-end="url(#arrow)" />
+
+                <rect x="90" y="150" width="150" height="50" class="dia-box" style="fill: #f0fdf4; stroke: #10b981;" />
+                <text x="165" y="175" class="dia-text" style="fill: #065f46; font-size: 9px;">สั่งจ่ายไฟกลับ 0V (Safe State)</text>
+                <text x="165" y="188" class="dia-text-sub" style="font-size: 8px; fill: #047857;">(ป้องกันแรงดันไฟสะสมกระชากชิป)</text>
+            </svg>
+        `
+    },
+    api_comparison: {
+        module: "Module 4: Hands-on Workshop",
+        title: "15. เปรียบเทียบ Hi-Level vs Low-Level",
+        narrative: `
+            <h4>การเปรียบเทียบเชิงลึก: สถาปัตยกรรม High-Level และ Low-Level</h4>
+            <p>ในการเขียนโปรแกรมควบคุมบอร์ดวัดเครื่องทดสอบ (ATE Code) สำหรับสายการผลิตจริง การเลือกใช้ระดับคำสั่งที่เหมาะสมเป็นหัวใจสำคัญของการควบคุมความเร็วในการทดสอบ (Test Time) ความซับซ้อนในการพัฒนาระบบ และความสามารถในการขยายระบบภายหลัง</p>
+
+            <h4>ตารางเปรียบเทียบคุณลักษณะสำคัญ:</h4>
+            <table style="width: 100%; border-collapse: collapse; margin: 15px 0; font-size: 11px; text-align: left; line-height: 1.4;">
+                <thead>
+                    <tr style="background-color: var(--bg-corporate-light); color: white;">
+                        <th style="padding: 8px; border: 1px solid var(--border-grey);">คุณสมบัติ</th>
+                        <th style="padding: 8px; border: 1px solid var(--border-grey);">High-Level (STL)</th>
+                        <th style="padding: 8px; border: 1px solid var(--border-grey);">Low-Level (Direct Driver)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid var(--border-grey); font-weight: 600;">การอ้างอิงตำแหน่ง (Hardware Binding)</td>
+                        <td style="padding: 8px; border: 1px solid var(--border-grey);">ใช้ชื่อพินทางตรรกะ (Logical Pins) ผูกกับระบบแผนผัง .pinmap อัตโนมัติ</td>
+                        <td style="padding: 8px; border: 1px solid var(--border-grey);">ใช้ตำแหน่งช่องสัญญาณทางกายภาพตรงๆ เช่น PXI1Slot3/0 (Channel/Slot binding)</td>
+                    </tr>
+                    <tr style="background-color: #f8fafc;">
+                        <td style="padding: 8px; border: 1px solid var(--border-grey); font-weight: 600;">การทดสอบหลายไซต์ (Multisite Support)</td>
+                        <td style="padding: 8px; border: 1px solid var(--border-grey);">ประมวลผลขนานทุกไซต์โดยอัตโนมัติ (ขนานในระดับเฟรมเวิร์ก)</td>
+                        <td style="padding: 8px; border: 1px solid var(--border-grey);">วิศวกรต้องจัดการเขียน Threading หรือวนลูปแยกแต่ละแชนเนลด้วยตนเอง</td>
+                    </tr>
+                    <tr>
+                        <td style="padding: 8px; border: 1px solid var(--border-grey); font-weight: 600;">ความยืดหยุ่นและการซ่อมบำรุง</td>
+                        <td style="padding: 8px; border: 1px solid var(--border-grey);">สูงมาก ย้ายสล็อตบอร์ดหรือสลับประเภทบอร์ดทำได้ผ่านการแก้ไฟล์แผนผัง .pinmap เท่านั้น</td>
+                        <td style="padding: 8px; border: 1px solid var(--border-grey);">ต่ำ หากมีการย้ายสล็อตหรือเปลี่ยนรุ่นฮาร์ดแวร์ จะต้องแก้ซอร์สโค้ด C# และคอมไพล์ใหม่</td>
+                    </tr>
+                    <tr style="background-color: #f8fafc;">
+                        <td style="padding: 8px; border: 1px solid var(--border-grey); font-weight: 600;">ระดับการควบคุมฟีเจอร์ (Level of Control)</td>
+                        <td style="padding: 8px; border: 1px solid var(--border-grey);">จำกัดเฉพาะฟังก์ชันสากลทั่วไปที่ใช้ทดสอบชิป</td>
+                        <td style="padding: 8px; border: 1px solid var(--border-grey);">เต็มรูปแบบ สามารถเขียนปรับจูนค่าลึกๆ ในระดับรีจิสเตอร์ของบอร์ดเครื่องวัดได้</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h4>ทางเลือกในการเขียนโปรแกรมร่วมกัน (The Escape Hatch):</h4>
+            <p>ในโปรเจกต์งานเทสจริง เราไม่จำเป็นต้องเลือกใช้อย่างใดอย่างหนึ่งเพียงตัวเดียว สถาปัตยกรรม STL ของ ADI และ NI รองรับการเรียกใช้คำสั่งระดับล่างผ่าน <code>DCPowerSessionsBundle</code> โดยใช้เมธอด <code>GetNIDCPowerSessions()</code> เพื่อขอสิทธิ์ดึงเซสชันไดรเวอร์ตรงไปทำการปรับจูนค่าคุณสมบัติความปลอดภัยและฟิลเตอร์เฉพาะจุดได้ตลอดเวลา</p>
+        `,
+        codeLeft: `using System;
+using NationalInstruments.SemiconductorTestLibrary.InstrumentAbstraction;
+using NationalInstruments.SemiconductorTestLibrary.InstrumentAbstraction.DCPower;
+
+// วิธีจ่ายไฟ & วัดด้วย High-Level STL
+public static void RunHighLevel(
+    ISemiconductorModuleContext tsmContext,
+    string[] pins)
+{
+    var sessionManager = new TSMSessionManager(tsmContext);
+    DCPowerSessionsBundle smuSessions = sessionManager.DCPower(pins);
+
+    // จ่ายแรงดันไฟเลี้ยง
+    smuSessions.ForceVoltage(3.3, 0.05);
+
+    // สั่งวัดและรายงานส่งผลกลับทันที
+    smuSessions.MeasureAndPublishVoltage("VDD_Volt_Result");
+}`,
+        codeRight: `using System;
+using NationalInstruments.SemiconductorTestLibrary.InstrumentAbstraction;
+using NationalInstruments.SemiconductorTestLibrary.InstrumentAbstraction.DCPower;
+
+// วิธีจ่ายไฟ & วัดด้วย Low-Level Driver (Direct API)
+public static void RunLowLevel(
+    ISemiconductorModuleContext tsmContext,
+    string[] pins)
+{
+    var sessionManager = new TSMSessionManager(tsmContext);
+    DCPowerSessionsBundle smuSessions = sessionManager.DCPower(pins);
+
+    // สกัดเซสชันระดับล่าง NIDCPower ออกมาจาก Bundle
+    var rawDriverSessions = smuSessions.GetNIDCPowerSessions();
+
+    foreach (var session in rawDriverSessions)
+    {
+        // กำหนดลักษณะการจ่ายไฟตรงกับโมเดลการ์ดจริง
+        session.Source.ConfigureOutputFunction(
+            NIDCPowerSourceOutputFunction.DCVoltage);
+        session.Source.VoltageLevel = 3.3;
+        session.Source.CurrentLimit = 0.05;
+
+        // สั่งปล่อยกระแสในระดับฮาร์ดแวร์จริง
+        session.Control.Initiate();
+
+        // ตรวจจับวัดระดับแรงดันย้อนกลับ
+        double measuredVoltage = session.Measurement.Measure(
+            NIDCPowerMeasurementType.Voltage);
+
+        // ส่งรายงานผลลัพธ์กลับ TestStand Context ด้วยตนเอง
+        tsmContext.PublishResults(
+            new string[] { "VDD_Volt_Result" },
+            new double[] { measuredVoltage });
+    }
+}`,
+        diagram: `
+            <svg viewBox="-30 -20 460 320" width="100%" height="100%" class="diagram-svg">
+                <defs>
+                    <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
+                        <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
+                    </marker>
+                </defs>
+                <!-- C# Test Code -->
+                <rect x="100" y="10" width="200" height="30" class="dia-box active" />
+                <text x="200" y="30" class="dia-text" style="fill: #2b5c8f; font-weight: 600;">C# Test Code</text>
+
+                <!-- Split Arrows -->
+                <path d="M150 44v16H100v10" class="dia-arrow" marker-end="url(#arrow)" />
+                <path d="M250 44v16H320v10" class="dia-arrow" marker-end="url(#arrow)" />
+
+                <!-- Left Stack: High-Level Path -->
+                <rect x="10" y="80" width="180" height="30" class="dia-box" style="fill: #eff6ff; stroke: #3b82f6;" />
+                <text x="100" y="100" class="dia-text" style="fill: #1d4ed8;">STL Abstraction</text>
+
+                <path d="M100 114v16" class="dia-arrow" marker-end="url(#arrow)" />
+
+                <rect x="10" y="140" width="180" height="30" class="dia-box" />
+                <text x="100" y="160" class="dia-text">Pin Map (.pinmap)</text>
+
+                <path d="M100 174v16" class="dia-arrow" marker-end="url(#arrow)" />
+
+                <rect x="10" y="200" width="180" height="30" class="dia-box" />
+                <text x="100" y="220" class="dia-text">STL Execution Engine</text>
+
+                <!-- Right Stack: Low-Level Path -->
+                <rect x="230" y="80" width="180" height="30" class="dia-box" style="fill: #fdf2f8; stroke: #db2777;" />
+                <text x="320" y="100" class="dia-text" style="fill: #9d174d;">Escape Hatch (Direct)</text>
+
+                <path d="M320 114v16" class="dia-arrow" marker-end="url(#arrow)" />
+
+                <rect x="230" y="140" width="180" height="30" class="dia-box" />
+                <text x="320" y="160" class="dia-text">GetNIDCPowerSessions</text>
+
+                <path d="M320 174v16" class="dia-arrow" marker-end="url(#arrow)" />
+
+                <rect x="230" y="200" width="180" height="30" class="dia-box" />
+                <text x="320" y="220" class="dia-text">Direct Driver Session</text>
+
+                <!-- Join to Hardware -->
+                <path d="M100 234v10h50v6" class="dia-arrow" marker-end="url(#arrow)" />
+                <path d="M320 234v10h-70v6" class="dia-arrow" marker-end="url(#arrow)" />
+
+                <rect x="100" y="260" width="200" height="30" class="dia-box" style="fill: #f1f5f9; stroke: #64748b;" />
+                <text x="200" y="280" class="dia-text" style="fill: #334155;">Physical Hardware (SMU)</text>
             </svg>
         `
     }
@@ -809,13 +1145,13 @@ let completedTopics = {};
 document.addEventListener('DOMContentLoaded', () => {
     // Load progress from local storage
     loadProgress();
-    
+
     // Load sidebar state from local storage
     const sidebarCollapsed = localStorage.getItem('sidebar_collapsed') === 'true';
     if (sidebarCollapsed) {
         document.querySelector('.app-layout').classList.add('sidebar-collapsed');
     }
-    
+
     // Switch to first topic
     switchSyllabus(activeTopicKey);
 
@@ -824,6 +1160,34 @@ document.addEventListener('DOMContentLoaded', () => {
     searchInput.addEventListener('input', (e) => {
         filterSyllabus(e.target.value);
     });
+
+    // Handle dynamic diagram fitting on window resize
+    window.addEventListener('resize', () => {
+        const svg = document.querySelector('#diagram-area svg');
+        if (svg) {
+            fitDiagramToContent(svg);
+        }
+        // Update side-by-side code layout if applicable
+        const codePanel = document.querySelector('.code-panel');
+        const activeTopic = syllabusData[activeTopicKey];
+        if (codePanel && activeTopic && activeTopic.codeLeft && activeTopic.codeRight) {
+            const isMobile = window.innerWidth <= 768;
+            codePanel.style.gridTemplateColumns = isMobile ? '1fr' : '1fr 1fr';
+        }
+    });
+
+    // Handle dynamic diagram fitting when sidebar transition finishes
+    const workspace = document.querySelector('.workspace');
+    if (workspace) {
+        workspace.addEventListener('transitionend', (e) => {
+            if (e.propertyName === 'margin-left' || e.propertyName === 'margin') {
+                const svg = document.querySelector('#diagram-area svg');
+                if (svg) {
+                    fitDiagramToContent(svg);
+                }
+            }
+        });
+    }
 });
 
 // Load progress from local storage
@@ -851,7 +1215,7 @@ function updateProgressBar() {
     const total = Object.keys(syllabusData).length;
     const completedCount = Object.values(completedTopics).filter(Boolean).length;
     const percent = total > 0 ? Math.round((completedCount / total) * 100) : 0;
-    
+
     document.getElementById('progress-percent').innerText = `${percent}%`;
     document.getElementById('progress-fill').style.width = `${percent}%`;
     document.getElementById('progress-count').innerText = `เรียนรู้แล้ว ${completedCount} จาก ${total} หัวข้อ`;
@@ -863,6 +1227,16 @@ function switchSyllabus(key) {
     if (!topic) return;
 
     activeTopicKey = key;
+
+    // Toggle full-width layout class for Topic 15 (api_comparison)
+    const contentGrid = document.querySelector('.content-grid');
+    if (contentGrid) {
+        if (key === 'api_comparison') {
+            contentGrid.classList.add('full-width-layout');
+        } else {
+            contentGrid.classList.remove('full-width-layout');
+        }
+    }
 
     // Update navigation active class
     document.querySelectorAll('.nav-item').forEach(item => item.classList.remove('active'));
@@ -877,11 +1251,35 @@ function switchSyllabus(key) {
     document.getElementById('lesson-content-area').innerHTML = topic.narrative;
 
     // Update Code Snippet
-    const codeArea = document.getElementById('code-snippet-area');
-    codeArea.innerHTML = highlightCSharp(topic.code);
+    const codePanel = document.querySelector('.code-panel');
+    if (topic.codeLeft && topic.codeRight) {
+        const isMobile = window.innerWidth <= 768;
+        codePanel.style.display = 'grid';
+        codePanel.style.gridTemplateColumns = isMobile ? '1fr' : '1fr 1fr';
+        codePanel.style.gap = '1px';
+        codePanel.style.background = '#334155';
+        codePanel.innerHTML = `
+            <div style="background-color: var(--bg-code); display: flex; flex-direction: column; overflow: hidden;">
+                <div style="background-color: rgba(255,255,255,0.05); color: #94a3b8; padding: 6px 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.05);">High-Level STL</div>
+                <pre class="code-pre" style="margin: 0; padding: 12px; overflow: auto;"><code class="code-code" style="font-size: 11px;">${highlightCSharp(topic.codeLeft)}</code></pre>
+            </div>
+            <div style="background-color: var(--bg-code); display: flex; flex-direction: column; overflow: hidden; border-left: 1px solid rgba(255,255,255,0.05);">
+                <div style="background-color: rgba(255,255,255,0.05); color: #94a3b8; padding: 6px 12px; font-size: 11px; font-weight: 600; text-transform: uppercase; border-bottom: 1px solid rgba(255,255,255,0.05);">Low-Level Driver (Direct API)</div>
+                <pre class="code-pre" style="margin: 0; padding: 12px; overflow: auto;"><code class="code-code" style="font-size: 11px;">${highlightCSharp(topic.codeRight)}</code></pre>
+            </div>
+        `;
+    } else {
+        codePanel.style.display = 'flex';
+        codePanel.style.gridTemplateColumns = 'none';
+        codePanel.style.gap = '0';
+        codePanel.style.background = 'var(--bg-code)';
+        codePanel.innerHTML = `
+            <pre class="code-pre"><code class="code-code" id="code-snippet-area">${highlightCSharp(topic.code)}</code></pre>
+        `;
+    }
 
     // Update Diagram SVG
-    document.getElementById('diagram-area').innerHTML = topic.diagram;
+    renderDiagram(topic.diagram);
 
     // Update button states
     updateNavButtons();
@@ -893,6 +1291,47 @@ function switchSyllabus(key) {
 
     // Scroll to top of content area
     document.getElementById('lesson-content-area').scrollTop = 0;
+
+    // Automatically collapse sidebar on mobile after choosing a topic
+    if (window.innerWidth <= 768) {
+        toggleSidebar(true);
+    }
+}
+
+function renderDiagram(diagramMarkup) {
+    const diagramArea = document.getElementById('diagram-area');
+    diagramArea.innerHTML = diagramMarkup.replace(
+        'width="100%" height="100%"',
+        'width="100%" height="100%" role="img" preserveAspectRatio="xMidYMid meet"'
+    );
+    fitDiagramToContent(diagramArea.querySelector('svg'));
+}
+
+function fitDiagramToContent(svg) {
+    if (!svg || typeof svg.getBBox !== 'function') return;
+
+    try {
+        const box = svg.getBBox();
+        if (!box.width || !box.height) return;
+
+        const padX = Math.max(18, box.width * 0.06);
+        const padY = Math.max(16, box.height * 0.14);
+        const viewBoxWidth = box.width + padX * 2;
+        const viewBoxHeight = box.height + padY * 2;
+        svg.setAttribute(
+            'viewBox',
+            `${box.x - padX} ${box.y - padY} ${viewBoxWidth} ${viewBoxHeight}`
+        );
+
+        const panel = svg.closest('.visual-panel');
+        if (panel) {
+            const panelWidth = panel.clientWidth || 640;
+            const targetHeight = Math.ceil(panelWidth * (viewBoxHeight / viewBoxWidth));
+            panel.style.height = `${Math.min(Math.max(targetHeight, 210), 360)}px`;
+        }
+    } catch (error) {
+        // Keep the author-defined viewBox if the browser cannot measure this SVG.
+    }
 }
 
 // Robust C# Syntax highlighter using token placeholders to prevent double-replacements
@@ -940,8 +1379,8 @@ function highlightCSharp(codeText) {
 
     // 5. Highlight Types / Classes in NI/ADI STL
     const types = [
-        "ISemiconductorModuleContext", "NIDCPower", "TSMSessionManager", 
-        "PrecisionTimeSpan", "DCPowerSessionsBundle", "DigitalSessionsBundle", 
+        "ISemiconductorModuleContext", "NIDCPower", "TSMSessionManager",
+        "PrecisionTimeSpan", "DCPowerSessionsBundle", "DigitalSessionsBundle",
         "DCPowerMeasureSettings", "ContinuitySupplySettings", "ContinuityPinSettings",
         "ContinuityTestConditions", "PPMUSettings", "DCPowerSourceSettings",
         "SiteData", "PinSiteData", "DmmSessionsBundle", "DAQmxTaskSessionsBundle",
@@ -976,14 +1415,14 @@ function navigateTopic(direction) {
 function updateNavButtons() {
     const keys = Object.keys(syllabusData);
     const currentIndex = keys.indexOf(activeTopicKey);
-    
+
     document.getElementById('btn-prev').disabled = currentIndex === 0;
     document.getElementById('btn-next').disabled = currentIndex === keys.length - 1;
 
     // Update the Mark Complete button status
     const btn = document.getElementById('btn-complete-toggle');
     if (completedTopics[activeTopicKey]) {
-        btn.innerText = "✓ เรียนรู้เรียบร้อยแล้ว";
+        btn.innerText = "เรียนรู้เรียบร้อยแล้ว";
         btn.className = "btn btn-success";
     } else {
         btn.innerText = "ทำเครื่องหมายว่าเรียนรู้แล้ว";
@@ -1000,7 +1439,7 @@ function toggleComplete(key, event) {
     completedTopics[key] = chk.checked;
     saveProgress();
     updateNavButtons();
-    
+
     if (typeof syncQuizStateWithCompletion === 'function' && key === activeTopicKey) {
         syncQuizStateWithCompletion();
     }
@@ -1010,7 +1449,7 @@ function toggleComplete(key, event) {
 function markCurrentTopicComplete() {
     const isCompleted = !completedTopics[activeTopicKey];
     completedTopics[activeTopicKey] = isCompleted;
-    
+
     // Check or uncheck sidebar box
     const chk = document.getElementById(`chk-${activeTopicKey}`);
     if (chk) chk.checked = isCompleted;
@@ -1026,21 +1465,43 @@ function markCurrentTopicComplete() {
 // Filter the sidebar syllabus navigation list based on search
 function filterSyllabus(query) {
     const lowercaseQuery = query.toLowerCase();
-    
+
     for (const [key, topic] of Object.entries(syllabusData)) {
         const item = document.getElementById(`nav-${key}`);
         if (!item) continue;
 
-        const textMatches = topic.title.toLowerCase().includes(lowercaseQuery) || 
+        const textMatches = topic.title.toLowerCase().includes(lowercaseQuery) ||
                             topic.narrative.toLowerCase().includes(lowercaseQuery) ||
                             topic.code.toLowerCase().includes(lowercaseQuery);
-        
+
         if (textMatches) {
             item.style.display = 'flex';
         } else {
             item.style.display = 'none';
         }
     }
+
+    // Hide module headers if all items under them are hidden
+    const sections = document.querySelectorAll('.nav-section');
+    sections.forEach(section => {
+        const list = section.nextElementSibling;
+        if (list && list.classList.contains('nav-list')) {
+            const items = list.querySelectorAll('.nav-item');
+            let hasVisible = false;
+            items.forEach(item => {
+                if (item.style.display !== 'none') {
+                    hasVisible = true;
+                }
+            });
+            if (hasVisible) {
+                section.style.display = 'block';
+                list.style.display = 'block';
+            } else {
+                section.style.display = 'none';
+                list.style.display = 'none';
+            }
+        }
+    });
 }
 
 // Toggle sidebar state and save it in localStorage
@@ -1130,6 +1591,24 @@ const quizQuestions = {
         answerRegex: /(MeasureAndPublish|MeasureAndPublishVoltage)/i,
         hint: "สะกด: MeasureAndPublish หรือ MeasureAndPublishVoltage",
         solution: "MeasureAndPublish (เช่น MeasureAndPublishVoltage)"
+    },
+    test_assignment: {
+        question: "คำสั่งใน STL ที่ใช้รายงานระดับแรงดันออกไปยัง TestStand และเก็บสถิติพร้อมกันคืออะไร?",
+        answerRegex: /MeasureAndPublishVoltage/i,
+        hint: "สะกดสะกด: MeasureAndPublishVoltage",
+        solution: "MeasureAndPublishVoltage"
+    },
+    test_solution: {
+        question: "คลาสเซสชันในการควบคุมมัดรวมบอร์ด DCPower ที่คืนมาจาก sessionManager คือคลาสใด?",
+        answerRegex: /DCPowerSessionsBundle/i,
+        hint: "คำตอบคือ DCPowerSessionsBundle",
+        solution: "DCPowerSessionsBundle"
+    },
+    api_comparison: {
+        question: "หากมีความจำเป็นต้องเข้าถึงฟีเจอร์ระดับล่างที่ STL ไม่รองรับ ดึงข้อมูลออกมาใช้ต่อใน C# เราต้องใช้คำสั่งใดของ DCPowerSessionsBundle ในการแปลงออกมาเป็นไดรเวอร์ NIDCPower?",
+        answerRegex: /GetNIDCPowerSessions/i,
+        hint: "สะกด: GetNIDCPowerSessions",
+        solution: "GetNIDCPowerSessions"
     }
 };
 
@@ -1146,7 +1625,7 @@ function resetAndLoadQuiz(topic) {
     const feedbackArea = document.getElementById('quiz-feedback-area');
     const questionText = document.getElementById('quiz-question-text');
     const quizBlock = document.getElementById('quiz-block');
-    
+
     if (!userInput || !feedbackArea || !questionText || !quizBlock) return;
 
     userInput.value = '';
@@ -1158,14 +1637,14 @@ function resetAndLoadQuiz(topic) {
     if (topic && topic.quiz) {
         quizBlock.style.display = 'flex';
         questionText.innerText = topic.quiz.question;
-        
+
         // If the topic is already marked completed, show success feedback
         if (completedTopics[activeTopicKey]) {
             userInput.disabled = true;
             userInput.value = topic.quiz.solution;
             feedbackArea.style.display = 'block';
             feedbackArea.className = 'quiz-feedback success';
-            feedbackArea.innerHTML = '<strong>✓ คุณผ่านแบบทดสอบของหัวข้อนี้แล้ว!</strong>';
+            feedbackArea.innerHTML = '<strong>คุณผ่านแบบทดสอบของหัวข้อนี้แล้ว!</strong>';
         }
     } else {
         quizBlock.style.display = 'none';
@@ -1178,7 +1657,7 @@ function syncQuizStateWithCompletion() {
     const userInput = document.getElementById('quiz-user-input');
     const feedbackArea = document.getElementById('quiz-feedback-area');
     const topic = syllabusData[activeTopicKey];
-    
+
     if (!userInput || !feedbackArea || !topic || !topic.quiz) return;
 
     if (isCompleted) {
@@ -1186,7 +1665,7 @@ function syncQuizStateWithCompletion() {
         userInput.value = topic.quiz.solution;
         feedbackArea.style.display = 'block';
         feedbackArea.className = 'quiz-feedback success';
-        feedbackArea.innerHTML = '<strong>✓ คุณผ่านแบบทดสอบของหัวข้อนี้แล้ว!</strong>';
+        feedbackArea.innerHTML = '<strong>คุณผ่านแบบทดสอบของหัวข้อนี้แล้ว!</strong>';
     } else {
         userInput.disabled = false;
         userInput.value = '';
@@ -1200,12 +1679,12 @@ function syncQuizStateWithCompletion() {
 function checkQuizAnswer() {
     const userInputField = document.getElementById('quiz-user-input');
     const feedbackArea = document.getElementById('quiz-feedback-area');
-    
+
     if (!userInputField || !feedbackArea) return;
 
     const userInput = userInputField.value.trim();
     if (!userInput) {
-        showFeedback('info', '💡 กรุณาพิมพ์คำตอบลงในช่องว่างก่อนส่งคำตอบครับ');
+        showFeedback('info', 'กรุณาพิมพ์คำตอบลงในช่องว่างก่อนส่งคำตอบครับ');
         return;
     }
 
@@ -1216,8 +1695,8 @@ function checkQuizAnswer() {
 
     if (isCorrect) {
         userInputField.disabled = true;
-        showFeedback('success', `<strong>🎉 ถูกต้องแล้วครับ!</strong> คำตอบคือ "${topic.quiz.solution}"<br>ระบบทำการเช็คเครื่องหมายผ่านบทเรียนนี้ให้คุณเรียบร้อยแล้วครับ!`);
-        
+        showFeedback('success', `<strong>ถูกต้องแล้วครับ!</strong> คำตอบคือ "${topic.quiz.solution}"<br>ระบบทำการเช็คเครื่องหมายผ่านบทเรียนนี้ให้คุณเรียบร้อยแล้วครับ!`);
+
         // Auto-complete the active syllabus topic
         completedTopics[activeTopicKey] = true;
         const chk = document.getElementById(`chk-${activeTopicKey}`);
@@ -1225,7 +1704,7 @@ function checkQuizAnswer() {
         saveProgress();
         updateNavButtons();
     } else {
-        showFeedback('error', '<strong>❌ คำตอบยังไม่ถูกต้องครับ!</strong> ลองพิมพ์ตรวจสอบตัวสะกดหรือกดปุ่มด้านล่างเพื่อดูคำใบ้หรือเฉลยดูนะครับ');
+        showFeedback('error', '<strong>คำตอบยังไม่ถูกต้องครับ!</strong> ลองพิมพ์ตรวจสอบตัวสะกดหรือกดปุ่มด้านล่างเพื่อดูคำใบ้หรือเฉลยดูนะครับ');
     }
 }
 
@@ -1243,22 +1722,22 @@ function showFeedback(type, htmlContent) {
 function showQuizHint() {
     const topic = syllabusData[activeTopicKey];
     if (!topic || !topic.quiz) return;
-    showFeedback('info', `<strong>💡 คำใบ้:</strong> ${topic.quiz.hint}`);
+    showFeedback('info', `<strong>คำใบ้:</strong> ${topic.quiz.hint}`);
 }
 
 // Show quiz solution
 function showQuizSolution() {
     const topic = syllabusData[activeTopicKey];
     if (!topic || !topic.quiz) return;
-    
+
     const userInputField = document.getElementById('quiz-user-input');
     if (userInputField) {
         userInputField.value = topic.quiz.solution;
         userInputField.disabled = true;
     }
-    
-    showFeedback('success', `<strong>🔑 เฉลยคือ:</strong> "${topic.quiz.solution}"<br>ระบบบันทึกผลว่าผ่านแบบทดสอบนี้ให้แล้วครับ`);
-    
+
+    showFeedback('success', `<strong>เฉลยคือ:</strong> "${topic.quiz.solution}"<br>ระบบบันทึกผลว่าผ่านแบบทดสอบนี้ให้แล้วครับ`);
+
     // Auto-complete the active syllabus topic
     completedTopics[activeTopicKey] = true;
     const chk = document.getElementById(`chk-${activeTopicKey}`);
