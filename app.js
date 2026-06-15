@@ -31,7 +31,7 @@ namespace ADIProjectTemplate.TestModules
     // โค้ดของวิศวกรจะอิมพอร์ต Abstractions เหล่านี้เข้ามาสั่งงานแบบ High-level
 }`,
         diagram: `
-            <svg viewBox="0 0 400 220" width="100%" height="100%" class="diagram-svg">
+            <svg viewBox="-30 -20 460 260" width="100%" height="100%" class="diagram-svg">
                 <defs>
                     <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
                         <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
@@ -83,7 +83,7 @@ digitalPinSessions.ForceVoltage(1.8, currentLimit);
 // 2. ส่งคำสั่งผ่านพินกลุ่มพลังงานหลัก (ใช้บอร์ด SMU)
 dcPowerPinSessions.ForceVoltage(1.8, currentLimit);`,
         diagram: `
-            <svg viewBox="0 0 400 220" width="100%" height="100%" class="diagram-svg">
+            <svg viewBox="-30 -20 460 260" width="100%" height="100%" class="diagram-svg">
                 <defs>
                     <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
                         <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
@@ -149,7 +149,7 @@ public static void TS_Leakage(ISemiconductorModuleContext tsmContext, string[] p
     // หลังจากนี้เราจะใช้ตัวแปร sessionManager ในการดึงเซสชันบอร์ดต่างๆ
 }`,
         diagram: `
-            <svg viewBox="0 0 400 220" width="100%" height="100%" class="diagram-svg">
+            <svg viewBox="-30 -20 460 260" width="100%" height="100%" class="diagram-svg">
                 <defs>
                     <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
                         <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
@@ -212,7 +212,7 @@ DCPowerSessionsBundle smuPins = sessionManager.DCPower("SupplyPins");
 // สั่งการบอร์ด SMU ทุกแชนเนลที่ผูกอยู่ให้จ่ายแรงดัน 3.3V พร้อมกันขนานกัน
 smuPins.ForceVoltage(3.3, currentLimit);`,
         diagram: `
-            <svg viewBox="0 0 400 220" width="100%" height="100%" class="diagram-svg">
+            <svg viewBox="-30 -20 460 260" width="100%" height="100%" class="diagram-svg">
                 <defs>
                     <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
                         <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
@@ -290,7 +290,7 @@ foreach (int site in tsmContext.ActiveSites)
     }
 }`,
         diagram: `
-            <svg viewBox="0 0 400 220" width="100%" height="100%" class="diagram-svg">
+            <svg viewBox="-30 -20 460 260" width="100%" height="100%" class="diagram-svg">
                 <!-- SiteData structure box -->
                 <rect x="50" y="20" width="300" height="150" class="dia-box" style="fill: #f8fafc; stroke: #2b5c8f;" />
                 <text x="200" y="40" class="dia-text">โครงสร้างอ็อบเจกต์ SiteData&lt;double&gt;</text>
@@ -346,7 +346,7 @@ dcOutput.Source.SourceDelay = new PrecisionTimeSpan(settlingTime);            //
 dcOutput.Source.Output.Enabled = true;                                       // 6. เปิดระบบเอาต์พุตแชนเนล
 dcOutput.Control.Initiate();                                                 // 7. เริ่มทำงานจริงปล่อยพลังงาน`,
         diagram: `
-            <svg viewBox="0 0 400 220" width="100%" height="100%" class="diagram-svg">
+            <svg viewBox="-30 -20 460 260" width="100%" height="100%" class="diagram-svg">
                 <defs>
                     <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
                         <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
@@ -431,7 +431,7 @@ for (int i = 0; i < digitalTestPins.Count; i++) {
 // สั่งรันจ่ายกระแสพร้อมกัน
 ppmuPins.ForceVoltage(ppmuForceSettings);`,
         diagram: `
-            <svg viewBox="0 0 400 220" width="100%" height="100%" class="diagram-svg">
+            <svg viewBox="-30 -20 460 260" width="100%" height="100%" class="diagram-svg">
                 <defs>
                     <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
                         <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
@@ -498,7 +498,7 @@ SiteData<double> dmmMeasurement = dmmPins.Read();
 // 3. พับลิชค่าแรงดันขึ้น TestStand
 tsmContext.PublishResults(new string[] { "SystemDmmPin" }, "DmmVoltage", dmmMeasurement);`,
         diagram: `
-            <svg viewBox="0 0 400 220" width="100%" height="100%" class="diagram-svg">
+            <svg viewBox="-30 -20 460 260" width="100%" height="100%" class="diagram-svg">
                 <defs>
                     <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
                         <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
@@ -562,7 +562,7 @@ SiteData<AnalogWaveform<double>> capturedWaveforms = daqTask.Read();
 // 3. ปิดเคลียร์งานเพื่อประหยัดหน่วยความจำ
 daqTask.Stop();`,
         diagram: `
-            <svg viewBox="0 0 400 220" width="100%" height="100%" class="diagram-svg">
+            <svg viewBox="-30 -20 460 260" width="100%" height="100%" class="diagram-svg">
                 <defs>
                     <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
                         <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
@@ -631,7 +631,7 @@ public static void TS_TestSequence(ISemiconductorModuleContext tsmContext)
     smuPins.ForceVoltage(0, 0.01);
 }`,
         diagram: `
-            <svg viewBox="0 0 400 220" width="100%" height="100%" class="diagram-svg">
+            <svg viewBox="-30 -20 460 260" width="100%" height="100%" class="diagram-svg">
                 <defs>
                     <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
                         <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
@@ -705,7 +705,7 @@ InvokeInParallel(
     }
 );`,
         diagram: `
-            <svg viewBox="0 0 400 220" width="100%" height="100%" class="diagram-svg">
+            <svg viewBox="-30 -20 460 260" width="100%" height="100%" class="diagram-svg">
                 <defs>
                     <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
                         <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
@@ -766,7 +766,7 @@ for (int i = 0; i < dcPowerTestPins.Count; i++)
     pinSession.MeasureAndPublishVoltage(dcPowerPublishIDs[i]);
 }`,
         diagram: `
-            <svg viewBox="0 0 400 220" width="100%" height="100%" class="diagram-svg">
+            <svg viewBox="-30 -20 460 260" width="100%" height="100%" class="diagram-svg">
                 <defs>
                     <marker id="arrow" viewBox="0 0 10 10" refX="6" refY="5" markerWidth="6" markerHeight="6" orient="auto-start-reverse">
                         <path d="M 0 1 L 10 5 L 0 9 z" fill="#64748b" />
